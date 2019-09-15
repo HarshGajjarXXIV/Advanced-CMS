@@ -1,0 +1,188 @@
+{% extends 'author/main/base.html' %}
+
+{% block title %} {{ author.username }} | Profile {% endblock %}
+
+{% block content %}
+
+    <div class="row">
+
+        <div class="col-lg-8">
+            <div class="jumbotron author-details shadow article-body">
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <img class="img-thumbnail rounded-circle author-profile-img shadow" src="{{ author.profile.profile_pic.url }}" alt="">
+                    </div>
+
+                    <div class="col-md-8 mt-3 mt-md-0">
+                        <div class="">
+                            <div class="section-title-author">Username</div>
+                            <p>{{ author.username }}</p>
+                        </div>
+
+                        <div class="">
+                            <div class="section-title-author">Email</div>
+                            <p>{{ author.email }}</p>
+                        </div>
+
+                        {% if author.first_name or author.first_name %}
+                            <div class="mt-4">
+                                <div class="section-title-author">Name</div>
+                                <p>{{ author.first_name }} {{ author.last_name }}</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        {% if author.profile.bio  %}
+                            <div class="bio mt-4">
+                                <div class="section-title-author">Bio</div>
+                                <p>{{ author.profile.bio }}</p>
+                            </div>
+                        {% endif %}
+
+                        {% if author.profile.twitter  %}
+                            <div class="mt-4">
+                                <div class="section-title-author">Twitter</div>
+                                <a href="{{ author.profile.twitter }}" target="_blank" class="twitter">{{ author.profile.twitter }}</a>
+                            </div>
+                        {% endif %}
+
+                        {% if author.profile.instagram  %}
+                            <div class="mt-4">
+                                <div class="section-title-author">Instagram</div>
+                                <a href="{{ author.profile.instagram }}" target="_blank" class="instagram">{{ author.profile.instagram }}</a>
+                            </div>
+                        {% endif %}
+
+                        {% if author.profile.facebook  %}
+                            <div class="mt-4">
+                                <div class="section-title-author">Facebook</div>
+                                <a href="{{ author.profile.facebook }}" target="_blank" class="facebook">{{ author.profile.facebook }}</a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+
+            <div class="jumbotron author-details shadow article-body">
+                <div class="container">
+
+                    <div class="mt-2">
+                        <div class="section-title-author">Number of Articles</div>
+                        {{ articles.count }}
+                    </div>
+
+                    <div class="mt-2">
+                        <div class="section-title-author">Number of Comments</div>
+                        {{ comments.count }}
+                    </div>
+
+                    <div class="mt-2">
+                        <div class="section-title-author">Join Date</div>
+                        {{ author.date_joined | date:"F d, Y" }}
+                    </div>
+
+                    <div class="mt-2">
+                        <div class="section-title-author">Last Profile Updated On</div>
+                        {{ author.profile.date_updated }}
+                    </div>
+
+                    <div class="mt-2">
+                        <div class="section-title-author">Role</div>
+                        {% if author.is_superuser %}
+                            Administrator
+                        {% else %}
+                            Author
+                        {% endif %}
+                    </div>
+
+                    {% if '/authors/' in request.path %}
+
+                        <div class="mt-2">
+                            <div class="section-title-author">Admin Access</div>
+                            {% if author.is_staff %}
+                                True
+                            {% else %}
+                                False
+                            {% endif %}
+                        </div>
+                        <div class="mt-2">
+                            <div class="section-title-author">Last Active Time</div>
+                            {{ author.last_login }}
+                        </div>
+
+                    {% endif %}
+
+                    <div class="row mt-4">
+                        {% if '/profile/' in request.path %}
+                            <div class="col-6">
+                                <a href="{% url 'author:profile-update' %}" class="btn btn-primary btn-block shadow">Edit</a>
+                            </div>
+                        {% else %}
+                            <div class="col-6">
+                                <a href="#" class="btn btn-primary btn-block shadow">Change Role</a>
+                            </div>
+                        {% endif %}
+
+                        {% if author.is_active %}
+                            <div class="col-6">
+                                <button type="button" class="btn btn-danger btn-block shadow" data-toggle="modal" data-target="#myModal">Deactivate</button>
+                            </div>
+                        {% else %}
+                            <div class="col-6">
+                                <button type="button" class="btn btn-success btn-block shadow" data-toggle="modal" data-target="#myModal">Reactivate</button>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="modal shadow" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    {% if author.is_active %}
+                        <h4 class="modal-title">Deactivate Account</h4>
+                    {% else %}
+                        <h4 class="modal-title">Reactivate Account</h4>
+                    {% endif %}
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    {% if author.is_active %}
+                        Are you sure you want to deactivate this account?
+                    {% else %}
+                        Are you sure you want to reactivate this account?
+                    {% endif %}
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    {% if author.is_active %}
+                        <a href="{% url 'author:author-deactivate' author.id %}" class="btn btn-danger shadow">Deactivate</a>
+                    {% else %}
+                        <a href="{% url 'author:author-deactivate' author.id %}" class="btn btn-success shadow">Reactivate</a>
+                    {% endif %}
+                    <button type="button" class="btn btn-secondary shadow" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

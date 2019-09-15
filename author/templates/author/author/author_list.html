@@ -1,0 +1,47 @@
+{% extends 'author/main/base.html' %}
+
+{% block title %} Authors {% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-lg-10">
+            <h3>Authors</h3>
+        </div>
+        <div class="col-lg-2">
+            <a class="btn btn-primary btn-block" href="{% url 'author:author-create' %}">Add Author</a>
+        </div>
+    </div>
+
+    <table class="table table-sm mt-4">
+         <thead>
+            <tr>
+                <th>#</th>
+                <th>Username</th>
+                <th>Name</th>
+                <th>Last Active</th>
+                <th>Status</th>
+                <th colspan="2">Actions</th>
+            </tr>
+         </thead>
+
+         {% for author in authors %}
+             <tbody>
+                <tr>
+                    <td>{{ author.id }}</td>
+                    <td>{{ author.username }}</td>
+                    <td>{{ author.first_name }} {{ author.last_name }}</td>
+                    <td>{{ author.last_login }}</td>
+                    {% if author.is_active %}
+                        <td>Active</td>
+                    {% else %}
+                        <td>Deactivated</td>
+                    {% endif %}
+                    <td><a href="{% url 'author:author-detail' author.id %}">View</a></td>
+                </tr>
+             </tbody>
+         {% endfor %}
+    </table>
+
+
+{% endblock %}

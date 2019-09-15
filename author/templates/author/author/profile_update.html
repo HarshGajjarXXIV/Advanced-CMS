@@ -1,0 +1,27 @@
+{% extends 'author/main/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Edit Profile {% endblock %}
+
+{% block content %}
+    <div class="row justify-content-md-center">
+        <div class="col-md-10">
+            <div class="jumbotron shadow">
+                <div class="container">
+
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <fieldset class="form-group">
+                            {{ author_form | crispy }}
+                            {{ profile_form | crispy }}
+                        </fieldset>
+                        <div class="form-group">
+                            <button class="btn btn-success btn-block shadow" type="submit">Update Profile</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,44 @@
+<div class="row">
+    {% for article in articles %}
+
+        <div class="col-md-6">
+
+            <div class="article-card mb-4 shadow">
+                <a href="{% url 'blog:article-detail' slug=article.slug %}">
+                    <img class="article-thumbnail" src="{{ article.thumbnail.url }}" alt="Card image cap">
+                </a>
+
+                <div class="jumbotron article-jumbotron">
+                    <div class="article-title custom-link">
+                        <a href="{% url 'blog:article-detail' slug=article.slug %}">{{ article.title }}</a>
+                    </div>
+
+                   <div class="article-details">
+                       <i class="fa fa-folder">
+                           {% for category in article.category.all %}
+                               <a href="{% url 'blog:articles-by-category' category.slug %}">
+                                   {{ category }}</a>{% if not forloop.last %}, {% endif %}
+                           {% endfor %}
+                       </i>
+                       <i class="fa fa-calendar-alt">&nbsp;<span>{{ article.date_posted | date:"M d, Y" }}</span></i>
+                       <i class="fa fa-user">
+                           <a href="{% url 'blog:articles-by-author' article.author %}">
+                               {% if article.author.first_name %}
+                                   {{ article.author.first_name }} {{ article.author.last_name }}
+                               {% else %}
+                                   {{ article.author.username }}
+                               {% endif %}
+                           </a>
+                       </i>
+                   </div>
+
+                    <div class="article-body mt-3">
+                        {{ article.snippet | safe }}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    {% endfor %}
+</div>

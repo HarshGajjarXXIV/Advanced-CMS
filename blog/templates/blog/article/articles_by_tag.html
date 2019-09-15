@@ -1,0 +1,22 @@
+{% extends 'blog/main/base.html' %}
+
+
+{% block title %} {{ tag.name }} | Tsploit {% endblock %}
+
+
+{% block content %}
+
+    <div class="section-title mb-3">
+        TAG: {{ tag.name | upper }}
+    <hr>
+    </div>
+
+    {% if articles %}
+        {% include 'blog/partials/article_card.html' %}
+    {% else %}
+        <center><h5><b>NO ARTICLES WERE FOUND!</b></h5></center>
+    {% endif %}
+
+    {% include 'blog/partials/paginate.html' %}
+
+{% endblock %}

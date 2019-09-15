@@ -1,0 +1,26 @@
+{% extends 'blog/main/base.html' %}
+
+
+{% block title %} TSploit {% endblock %}
+
+
+{% block content %}
+
+    <div class="section-title mb-3">
+        {% if 's' in request.GET %}
+            {% if articles %}
+                SEARCH RESULT
+            {% else %}
+                <center>NO RESULTS WERE FOUND!</center>
+            {% endif %}
+        {% else %}
+            LATEST ARTICLES
+        {% endif %}
+        <hr>
+    </div>
+
+    {% include 'blog/partials/article_card.html' %}
+
+    {% include 'blog/partials/paginate.html' %}
+
+{% endblock %}

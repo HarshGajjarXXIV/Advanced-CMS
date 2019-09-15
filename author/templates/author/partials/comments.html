@@ -1,0 +1,111 @@
+{% load crispy_forms_tags %}
+
+<div class="section-title">
+    LEAVE A COMMENT
+    <hr>
+</div>
+<div class="row justify-content-md-left">
+    <div class="col-lg-9">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                {{ form | crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-info shadow" type="submit">Add Comment</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% if comments %}
+    <div class="section-title mt-4">
+        COMMENTS
+        <hr>
+    </div>
+    <div class="comments">
+
+        {% for comment in comments %}
+            <div class="jumbotron shadow">
+
+                <div class="comment">
+                    {% if comment.is_author %}
+                        <img src="{{ comment.author.profile.profile_pic.url }}" class="user-img shadow" alt="">
+                    {% else %}
+                        <img src="/media/profile_pics/default.jpg" class="user-img shadow" alt="">
+                    {% endif %}
+                    <div class="comment-info">
+                        {% if comment.is_author %}
+                            <h5>{{ comment.author.username }}</h5>
+                            <h5>{{ comment.author.email }}</h5>
+                        {% else %}
+                            <h5>{{ comment.user_name }}</h5>
+                            <h5>{{ comment.email }}</h5>
+                        {% endif %}
+                    </div>
+                    <div class="comment-content mb-3">
+                        <div class="comment-time">
+                            {{ comment.date_posted }}
+                            {% if request.user.is_superuser %}
+                                <br>IP: {{ comment.ip_address }}
+                            {% endif %}
+                        </div>
+                        <p>{{ comment.comment | safe }}</p>
+                        <button type="button" class="reply-btn btn btn-info btn-sm shadow">Reply</button>
+                        <a class="btn btn-danger btn-sm shadow" href="{% url 'author:comment-delete' comment.id %}">Delete</a>
+                    </div>
+
+
+                    <div class="reply-comment-form container" style="display: none">
+                        <div class="form-group row">
+                            <form method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                                <fieldset class="form-group">
+                                    {{ form | crispy }}
+                                </fieldset>
+                                <div class="form-group">
+                                    <button class="btn btn-info shadow" type="submit">Replay</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="replies">
+                    {% for reply in comment.replies.all %}
+                        <div class="comment mt-3">
+                            {% if reply.is_author %}
+                                <img src="{{ reply.author.profile.profile_pic.url }}" class="user-img shadow" alt="">
+                            {% else %}
+                                <img src="/media/profile_pics/default.jpg" class="user-img shadow" alt="">
+                            {% endif %}
+                            <div class="comment-info">
+                                {% if comment.is_author %}
+                                    <h5>{{ reply.author.username }}</h5>
+                                    <h5>{{ reply.author.email }}</h5>
+                                {% else %}
+                                    <h5>{{ reply.user_name }}</h5>
+                                    <h5>{{ reply.email }}</h5>
+                                {% endif %}
+                            </div>
+                            <div class="comment-content">
+                                <div class="comment-time">
+                                    {{ reply.date_posted }}
+                                    {% if request.user.is_superuser %}
+                                        <br>IP: {{ reply.ip_address }}
+                                    {% endif %}
+                                </div>
+                                <p>{{ reply.comment | safe }}</p>
+                                <a class="btn btn-danger btn-sm shadow" href="{% url 'author:comment-delete' reply.id %}">Delete</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+        {% endfor %}
+
+    </div>
+{% endif %}

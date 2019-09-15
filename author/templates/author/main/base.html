@@ -1,0 +1,47 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="{% static 'blog/css/app.css' %}">
+        <link rel="stylesheet" href="{% static 'blog/css/all.min.css' %}">
+        <link rel="stylesheet" href="{% static 'blog/css/style.css' %}">
+
+        <title>{% block title %} {% endblock %}</title>
+    </head>
+
+    <body>
+        <!-- navbar -->
+        {% include 'author/partials/navbar.html' %}
+        <!-- end of navbar -->
+
+        <!-- main container -->
+        <div class="container mt-5 mb-5">
+            <!-- messages -->
+            {% include 'author/partials/messages.html' %}
+            <!-- end messages -->
+
+            <!-- content -->
+            {% block content %}
+
+                {% block paginate %} {% endblock %}
+            {% endblock %}
+            <!-- end of content -->
+        </div>
+        <!-- end of main container -->
+
+        <!-- JavaScript -->
+        <script src="{% static 'blog/js/jquery-3.3.1.min.js' %}" ></script>
+        <script src="{% static 'blog/js/popper.min.js' %}"></script>
+        <script src="{% static 'blog/js/app.js' %}" ></script>
+        {% block script %} {% endblock %}
+        <!-- end of JavaScript -->
+    </body>
+
+</html>

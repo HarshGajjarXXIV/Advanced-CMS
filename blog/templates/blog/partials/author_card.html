@@ -1,0 +1,32 @@
+<div class="jumbotron author-details shadow">
+
+    <div class="row">
+        <div class="col-md-3">
+            <img class="img-thumbnail rounded-circle author-img shadow" src="{{ author.profile.profile_pic.url }}" alt="">
+        </div>
+        <div class="col-md-9 mt-3 mt-md-0">
+
+            <b>{{ articles.paginator.count }} Articles, </b> <b>{{ comments.count }} Comments</b>
+
+            {% if author.profile.bio  %}
+                <p> {{ author.profile.bio | safe }} </p>
+            {% endif %}
+
+            <div class="social-networks">
+                {% if author.profile.twitter  %}
+                    <a href="{{ author.profile.twitter }}" target="_blank" class="twitter"><i class="fab fa-twitter"></i></a>
+                {% endif %}
+
+                {% if author.profile.instagram  %}
+                    <a href="{{ author.profile.instagram }}" target="_blank" class="instagram ml-1 mr-1"><i class="fab fa-instagram"></i></a>
+                {% endif %}
+
+                {% if author.profile.facebook  %}
+                    <a href="{{ author.profile.facebook }}" target="_blank" class="facebook"><i class="fab fa-facebook"></i></a>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,41 @@
+{% extends 'blog/main/about_base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block title %} Contact Us | Tsploit {% endblock %}
+
+
+{% block content %}
+
+    <div class="section-title mb-3">
+        CONTACT US
+        <hr>
+    </div>
+
+    <div class="jumbotron shadow">
+
+        <div class="body about-body">
+            <p>If you have any questions or suggestions, we are always ready to help you. You can contact us at <b>abc@xyz.com</b> or you can directly <a class="page-scroll" href="#message">leave a message via form.</a></p>
+        </div>
+
+    </div>
+
+    <div class="section-title" id="message">
+        LEAVE A MESSAGE
+        <hr>
+    </div>
+    <div class="row justify-content-md-left">
+        <div class="col-lg-6">
+            <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    {{ form | crispy }}
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-info shadow" type="submit">Send Message</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

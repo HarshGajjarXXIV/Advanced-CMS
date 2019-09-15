@@ -1,0 +1,39 @@
+{% extends 'author/main/base.html' %}
+
+{% block title %} Messages {% endblock %}
+
+{% block content %}
+
+    <h4>Messages</h4>
+
+    <table class="table table-sm mt-4">
+         <thead>
+            <tr>
+                <th>#</th>
+                <th>Subject</th>
+                <th>Email</th>
+                <th>Read</th>
+                <th colspan="2">Actions</th>
+            </tr>
+         </thead>
+
+         {% for user_message in user_messages %}
+             <tbody>
+                <tr>
+                    <td>{{ user_message.id }}</td>
+                    <td>{{ user_message.subject }}</td>
+                    <td>{{ user_message.email }}</td>
+                    <td>
+                        {% if user_message.is_seen %}
+                            <i class="fa fa-envelope-open"></i>
+                        {% else %}
+                            <i class="fa fa-envelope"></i>
+                        {% endif %}
+                    </td>
+                    <td><a href="{% url 'author:message-detail' user_message.id %}">View</a></td>
+                    <td><a href="{% url 'author:message-delete' user_message.id %}">Delete</a></td>
+                </tr>
+             </tbody>
+         {% endfor %}
+    </table>
+{% endblock %}

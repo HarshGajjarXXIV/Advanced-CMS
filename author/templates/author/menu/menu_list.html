@@ -1,0 +1,52 @@
+{% extends 'author/main/base.html' %}
+
+{% block title %} Menus {% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-lg-10">
+            <h3>Menus</h3>
+        </div>
+        <div class="col-lg-2">
+            <a class="btn btn-primary btn-block" href="{% url 'author:menu-create' %}">Add Menu</a>
+            <a class="btn btn-primary btn-block" href="{% url 'author:submenu-create' %}">Add Sub-Menu</a>
+        </div>
+    </div>
+
+    <table class="table table-sm mt-4">
+         <thead>
+            <tr>
+                <th>Name</th>
+                <th>Parent Menu</th>
+                <th>Type</th>
+                <th colspan="2">Actions</th>
+            </tr>
+         </thead>
+
+         {% for menu in menus %}
+             <tbody>
+                <tr>
+                    <td>{{ menu.name }}</td>
+                    <td>{{ menu.parent_menu }}</td>
+                    <td>{{ menu.type }}</td>
+                    <td><a href="{% url 'author:menu-update' menu.id %}">Edit</a></td>
+                    <td><a href="{% url 'author:menu-delete' menu.id %}">Delete</a></td>
+                </tr>
+                {% for sub_menu in sub_menus %}
+                    {% if sub_menu.parent_menu == menu %}
+                        <tr>
+                            <td>&emsp;<i class="fas fa-caret-right"></i> {{ sub_menu.name }}</td>
+                            <td>{{ sub_menu.parent_menu }}</td>
+                            <td>{{ sub_menu.type }}</td>
+                            <td><a href="{% url 'author:submenu-update' sub_menu.id %}">Edit</a></td>
+                            <td><a href="{% url 'author:submenu-delete' sub_menu.id %}">Delete</a></td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+             </tbody>
+         {% endfor %}
+    </table>
+
+
+{% endblock %}

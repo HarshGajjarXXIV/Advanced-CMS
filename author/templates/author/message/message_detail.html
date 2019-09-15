@@ -1,0 +1,25 @@
+{% extends 'author/main/base.html' %}
+
+{% block title %} {{ user_message.title }} | Message {% endblock %}
+
+{% block content %}
+
+    <div class="jumbotron shadow">
+
+        <div class="article-body">
+
+            <b>Subject:</b> {{ user_message.subject }}<br>
+            <b>Sender's Email:</b> {{ user_message.email }}<br>
+            {% if user_message.website %}
+                <b>Website:</b> <a target="_blank" href="{{ user_message.website }}">{{ user_message.website }}</a><br>
+            {% endif %}
+            <b>Sender's IP Address:</b> {{ user_message.ip_address }}
+
+            <div class="article-title mt-4">
+                Message
+            </div>
+            <p>{{ user_message.message }}</p>
+        </div>
+    </div>
+    <a class="btn btn-danger" href="{% url 'author:message-delete' user_message.id %}">Delete</a>
+{% endblock %}

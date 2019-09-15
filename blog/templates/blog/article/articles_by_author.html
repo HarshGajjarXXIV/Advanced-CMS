@@ -1,0 +1,35 @@
+{% extends 'blog/main/base.html' %}
+
+
+{% block title %}
+    {% with articles|first as article %}
+        {% if author.first_name %}
+            {{ author.first_name }} {{ author.last_name }}
+        {% else %}
+            {{ author.username }}
+        {% endif %} | Tsploit
+    {% endwith %}
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="section-title">
+        {% if author.first_name %}
+            {{ author.first_name }} {{ author.last_name }}
+        {% else %}
+            {{ author.username }}
+        {% endif %}
+        <hr>
+    </div>
+    {% include 'blog/partials/author_card.html' %}
+
+    {% if articles %}
+        {% include 'blog/partials/article_card.html' %}
+    {% else %}
+        <center><h5><b>NO ARTICLES WERE FOUND!</b></h5></center>
+    {% endif %}
+
+    {% include 'blog/partials/paginate.html' %}
+
+{% endblock %}

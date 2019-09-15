@@ -1,0 +1,74 @@
+{% extends 'author/main/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Add Menu {% endblock %}
+
+{% block content %}
+    <div class="row justify-content-md-center">
+        <div class="col-md-6">
+            <div class="jumbotron shadow">
+                <div class="container">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <fieldset class="form-group">
+                            {{ form | crispy }}
+                        </fieldset>
+                        <div class="form-group">
+                            <button class="btn btn-primary btn-block shadow" type="submit">Add / Update Menu</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block script %}
+    <script type="text/javascript">
+
+        let type;
+
+        function hideElements() {
+            $('label[for="id_category_link"]').hide();
+            $('label[for="id_article_link"]').hide();
+            $('label[for="id_author_link"]').hide();
+            $('label[for="id_external_url"]').hide();
+            document.getElementById("id_category_link").style.display = "none";
+            document.getElementById("id_article_link").style.display = "none";
+            document.getElementById("id_author_link").style.display = "none";
+            document.getElementById("id_external_url").style.display = "none";
+        }
+
+        function showElements() {
+            type = $('#id_type option:selected').text();
+
+            if (type === "Category") {
+                $('label[for="id_category_link"]').show();
+                document.getElementById("id_category_link").style.display = "block";
+            } else if (type === "Article") {
+                $('label[for="id_article_link"]').show();
+                document.getElementById("id_article_link").style.display = "block";
+            } else if (type === "External URL") {
+                $('label[for="id_external_url"]').show();
+                document.getElementById("id_external_url").style.display = "block";
+            } else if (type === "Author") {
+                $('label[for="id_author_link"]').show();
+                document.getElementById("id_author_link").style.display = "block";
+            }
+        }
+
+        hideElements();
+
+        $(document).ready(function() {
+            showElements();
+        });
+
+        $("#id_type").change(function() {
+            hideElements();
+            showElements();
+        });
+
+    </script>
+{% endblock %}

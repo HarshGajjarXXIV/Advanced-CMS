@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="9e138484-6682-4b9f-86cb-820c3b0acabc" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="db" type="feb32156:DbDataSourceImpl" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="db" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="db" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="main: schema" type="981a47c2:SqliteImplModel$Schema" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="db" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="main: schema" type="981a47c2:SqliteImplModel$Schema" />
+        <item name="auth_permission: table" type="3d80ac25:SqliteImplModel$Table" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" module-name="tsploit" is-module-sdk="true">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+    <option name="myUseModuleSdk" value="true" />
+    <option name="myModuleName" value="tsploit" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+        <option value="Python Script" />
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1OYyXreolmi9aqIoSBtgxtBbwk6" />
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="database.console.LAST_STATE" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/static" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
+  </component>
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <console-settings module-name="tsploit" is-module-sdk="true">
+        <option name="myUseModuleSdk" value="true" />
+        <option name="myModuleName" value="tsploit" />
+      </console-settings>
+    </option>
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/author/templates/author/article" />
+      <recent name="$PROJECT_DIR$/author/templates/author/config" />
+      <recent name="$PROJECT_DIR$/static" />
+      <recent name="$PROJECT_DIR$/blog/static" />
+      <recent name="$PROJECT_DIR$/author/templates/author/auth" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/static" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/media/logos" />
+      <recent name="$PROJECT_DIR$/author/templates/author/config" />
+      <recent name="$PROJECT_DIR$/blog/static" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="allServicesViewState">
+      <serviceView>
+        <treeState>
+          <expand />
+          <select />
+        </treeState>
+      </serviceView>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9e138484-6682-4b9f-86cb-820c3b0acabc" name="Default Changelist" comment="" />
+      <created>1550469385043</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1550469385043</updated>
+      <workItem from="1550469387934" duration="3438000" />
+      <workItem from="1550496294096" duration="15036000" />
+      <workItem from="1550557743152" duration="7212000" />
+      <workItem from="1550681375890" duration="6732000" />
+      <workItem from="1550727856514" duration="5975000" />
+      <workItem from="1550749722717" duration="3306000" />
+      <workItem from="1550768820583" duration="5826000" />
+      <workItem from="1550853028200" duration="4591000" />
+      <workItem from="1550898965244" duration="10390000" />
+      <workItem from="1550921368034" duration="5343000" />
+      <workItem from="1550940256644" duration="7106000" />
+      <workItem from="1551003307555" duration="8317000" />
+      <workItem from="1551082395051" duration="6152000" />
+      <workItem from="1551161780585" duration="5801000" />
+      <workItem from="1551196340383" duration="8235000" />
+      <workItem from="1551238144230" duration="3490000" />
+      <workItem from="1551287468421" duration="5146000" />
+      <workItem from="1551299492134" duration="2724000" />
+      <workItem from="1551327381820" duration="867000" />
+      <workItem from="1551346766120" duration="4616000" />
+      <workItem from="1551371416128" duration="640000" />
+      <workItem from="1551458354304" duration="5577000" />
+      <workItem from="1551509450435" duration="258000" />
+      <workItem from="1551509738341" duration="2270000" />
+      <workItem from="1551542837593" duration="10984000" />
+      <workItem from="1551591583733" duration="6200000" />
+      <workItem from="1551627514804" duration="12155000" />
+      <workItem from="1551680944831" duration="616000" />
+      <workItem from="1551797984578" duration="4481000" />
+      <workItem from="1551806129107" duration="4307000" />
+      <workItem from="1552276501796" duration="223000" />
+      <workItem from="1552280436168" duration="292000" />
+      <workItem from="1552280753521" duration="605000" />
+      <workItem from="1552281403097" duration="2888000" />
+      <workItem from="1552302951663" duration="4439000" />
+      <workItem from="1552318907072" duration="8011000" />
+      <workItem from="1552365377348" duration="7501000" />
+      <workItem from="1552389514891" duration="8959000" />
+      <workItem from="1552400800821" duration="29000" />
+      <workItem from="1552400855889" duration="22000" />
+      <workItem from="1552400907126" duration="2125000" />
+      <workItem from="1552406459201" duration="4413000" />
+      <workItem from="1552457563976" duration="5204000" />
+      <workItem from="1553522016808" duration="5067000" />
+      <workItem from="1553578562362" duration="2092000" />
+      <workItem from="1553707278243" duration="2468000" />
+      <workItem from="1554232231275" duration="861000" />
+      <workItem from="1555139624917" duration="175000" />
+      <workItem from="1555139843906" duration="20000" />
+      <workItem from="1555140087086" duration="1276000" />
+      <workItem from="1557121083021" duration="3002000" />
+      <workItem from="1557163217560" duration="100000" />
+      <workItem from="1557239249322" duration="2576000" />
+      <workItem from="1557247973335" duration="2094000" />
+      <workItem from="1557331048492" duration="2354000" />
+      <workItem from="1557384506556" duration="982000" />
+      <workItem from="1558499762594" duration="10316000" />
+      <workItem from="1558587814438" duration="1403000" />
+      <workItem from="1558933771026" duration="9559000" />
+      <workItem from="1558960068733" duration="4059000" />
+      <workItem from="1559045510176" duration="2384000" />
+      <workItem from="1559277903543" duration="5671000" />
+      <workItem from="1564168880737" duration="1360000" />
+      <workItem from="1564198688770" duration="577000" />
+      <workItem from="1565627215167" duration="1660000" />
+      <workItem from="1565628993502" duration="2810000" />
+      <workItem from="1565677648452" duration="592000" />
+      <workItem from="1565678261347" duration="1872000" />
+      <workItem from="1565680156871" duration="338000" />
+      <workItem from="1565680521405" duration="2861000" />
+      <workItem from="1565700128751" duration="5283000" />
+      <workItem from="1566485300730" duration="2896000" />
+      <workItem from="1566748061155" duration="9409000" />
+      <workItem from="1566990357002" duration="4898000" />
+      <workItem from="1567167004269" duration="6643000" />
+      <workItem from="1567189570313" duration="2253000" />
+      <workItem from="1567422698769" duration="9844000" />
+      <workItem from="1567443594746" duration="5805000" />
+      <workItem from="1568379469791" duration="203000" />
+      <workItem from="1568379806363" duration="1838000" />
+      <workItem from="1568529041449" duration="665000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

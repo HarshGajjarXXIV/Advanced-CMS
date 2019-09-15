@@ -1,0 +1,131 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-info shadow">
+    <div class="container">
+
+        <a class="navbar-brand" href="{% url 'blog:homepage' %}">
+            <img src="/media/defaults/logo_default.png" alt="">
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="fa fa-bars"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link
+                        {% if request.path == '/' %}
+                            active
+                        {% endif %}"
+                        href="{% url 'blog:homepage' %}">
+                        Home<span class="sr-only"></span>
+                    </a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle
+                        {% if '/category/android/' in request.path or '/category/apps-games/' in request.path  or '/category/ios/' in request.path %}
+                            active
+                        {% endif %}"
+                        href="#" data-toggle="dropdown">
+                        Mobile
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item
+                            {% if '/category/android/' in request.path %}
+                                active
+                            {% endif %}"
+                           href="{% url 'blog:articles-by-category' 'android' %}">Android
+                        </a>
+                        <a class="dropdown-item
+                            {% if '/category/ios/' in request.path %}
+                                active
+                            {% endif %}"
+                           href="{% url 'blog:articles-by-category' 'ios' %}">iOS
+                        </a>
+                        <a class="dropdown-item
+                            {% if '/category/apps-games/' in request.path %}
+                                active
+                            {% endif %}"
+                           href="{% url 'blog:articles-by-category' 'apps-games' %}">Apps & Games
+                        </a>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle
+                        {% if '/category/linux/' in request.path or '/category/windows/' in request.path %}
+                            active
+                        {% endif %}"
+                        href="#" data-toggle="dropdown">
+                        Computer
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item
+                            {% if '/category/linux/' in request.path %}
+                                active
+                            {% endif %}"
+                           href="{% url 'blog:articles-by-category' 'linux' %}">Linux
+                        </a>
+                        <a class="dropdown-item
+                            {% if '/category/windows/' in request.path %}
+                                active
+                            {% endif %}"
+                           href="{% url 'blog:articles-by-category' 'windows' %}">Windows
+                        </a>
+                    </div>
+                </li>
+
+                 <li class="nav-item">
+                    <a class="nav-link
+                        {% if '/category/cyber-security/' in request.path %}
+                            active
+                        {% endif %}"
+                        href="{% url 'blog:articles-by-category' 'cyber-security' %}">
+                        Cyber Security<span class="sr-only"></span>
+                    </a>
+                </li>
+
+                 <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="" data-toggle="dropdown">
+                        More
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item
+                            {% if '/about/' in request.path %}
+                                active
+                            {% endif %}"
+                           href="{% url 'blog:about-us' %}">About Us
+                        </a>
+                        <a class="dropdown-item
+                            {% if '/contact/' in request.path %}
+                                active
+                            {% endif %}"
+                           href="{% url 'blog:contact-us' %}">Contact Us
+                        </a>
+                        <a class="dropdown-item
+                            {% if '/privacy-policy/' in request.path %}
+                                active
+                            {% endif %}"
+                           href="{% url 'blog:privacy-policy' %}">Privacy Policy
+                        </a>
+                        <a class="dropdown-item
+                            {% if '/terms/' in request.path %}
+                                active
+                            {% endif %}"
+                           href="{% url 'blog:terms' %}">Terms of Service
+                        </a>
+                    </div>
+                </li>
+            </ul>
+
+            <form class="form-inline my-2 my-lg-0" method="get" action="{% url 'blog:homepage' %}">
+                <input class="form-control mr-sm-2" name="s" type="search" placeholder="Search" aria-label="Search" required>
+                <button class="btn btn-dark my-2 my-sm-0" type="submit"><i class="fa fa-search"></i> Search</button>
+            </form>
+
+        </div>
+
+    </div>
+</nav>

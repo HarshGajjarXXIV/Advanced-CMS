@@ -1,0 +1,103 @@
+{% load crispy_forms_tags %}
+
+<div class="section-title">
+    LEAVE A COMMENT
+    <hr>
+</div>
+<div class="row justify-content-md-left">
+    <div class="col-lg-9">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                {{ form | crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-info shadow" type="submit">Add Comment</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% if comments %}
+    <div class="section-title mt-4">
+        COMMENTS
+        <hr>
+    </div>
+    <div class="comments">
+
+        {% for comment in comments %}
+            <div class="jumbotron shadow">
+
+                <div class="comment">
+                    {% if comment.is_author %}
+                        <img src="{{ comment.author.profile.profile_pic.url }}" class="user-img shadow" alt="">
+                    {% else %}
+                        <img src="/media/profile_pics/default.jpg" class="user-img shadow" alt="">
+                    {% endif %}
+                    <div class="comment-info">
+                        {% if comment.is_author %}
+                            <a href="{% url 'blog:articles-by-author' article.author %}">
+                                {{ article.author.first_name }} {{ article.author.last_name }}
+                            </a>
+                        {% else %}
+                            <h5>{{ comment.user_name }}</h5>
+                        {% endif %}
+                        <div class="comment-time">
+                            {{ comment.date_posted }}
+                        </div>
+                    </div>
+                    <div class="comment-content mb-3">
+                        <p>{{ comment.comment | safe }}</p>
+                        <button type="button" class="reply-btn btn btn-info btn-sm shadow">Reply</button>
+                    </div>
+
+
+                    <div class="reply-comment-form container" style="display: none">
+                        <div class="form-group row">
+                            <form method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                                <fieldset class="form-group">
+                                    {{ form | crispy }}
+                                </fieldset>
+                                <div class="form-group">
+                                    <button class="btn btn-info shadow" type="submit">Replay</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="replies">
+                    {% for reply in comment.replies.all %}
+                        <div class="comment">
+                            {% if reply.is_author %}
+                                <img src="{{ reply.author.profile.profile_pic.url }}" class="user-img shadow" alt="">
+                            {% else %}
+                                <img src="/media/profile_pics/default.jpg" class="user-img shadow" alt="">
+                            {% endif %}
+                            <div class="comment-info">
+                                {% if reply.is_author %}
+                                    <a href="{% url 'blog:articles-by-author' article.author %}">
+                                        {{ article.author.first_name }} {{ article.author.last_name }}
+                                    </a>
+                                {% else %}
+                                    <h5>{{ reply.user_name }}</h5>
+                                {% endif %}
+                                <div class="comment-time">
+                                    {{ reply.date_posted }}
+                                </div>
+                            </div>
+                            <div class="comment-content">
+                                <p>{{ reply.comment | safe }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+        {% endfor %}
+
+    </div>
+{% endif %}

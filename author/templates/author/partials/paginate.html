@@ -1,0 +1,23 @@
+<div class="paginate mt-4">
+    {% if page_obj.has_other_pages %}
+
+        {% if page_obj.has_previous %}
+            <a class="btn btn-outline-info mb-4 shadow" href="?page=1{% if request.GET.s %}&s={{ request.GET.s }}{% endif %}">First</a>
+            <a class="btn btn-outline-info mb-4 shadow" href="?page={{ page_obj.previous_page_number }}{% if request.GET.s %}&s={{ request.GET.s }}{% endif %}"><i class="fa fa-arrow-left"></i></a>
+        {% endif %}
+
+        {% for num in paginator.page_range %}
+            {% if page_obj.number == num %}
+                <a class="btn btn-info mb-4 shadow" href="?page={{ num }}{% if request.GET.s %}&s={{ request.GET.s }}{% endif %}">{{ num }}</a>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                <a class="btn btn-outline-info mb-4 shadow" href="?page={{ num }}{% if request.GET.s %}&s={{ request.GET.s }}{% endif %}">{{ num }}</a>
+            {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+            <a class="btn btn-outline-info mb-4 shadow" href="?page={{ page_obj.next_page_number }}{% if request.GET.s %}&s={{ request.GET.s }}{% endif %}"><i class="fa fa-arrow-right"></i></a>
+            <a class="btn btn-outline-info mb-4 shadow" href="?page={{ paginator.num_pages }}{% if request.GET.s %}&s={{ request.GET.s }}{% endif %}">Last</a>
+        {% endif %}
+
+    {% endif %}
+</div>

@@ -1,0 +1,67 @@
+{% extends 'blog/main/base.html' %}
+
+
+{% block title %} {{ article.title }} | Tsploit{% endblock %}
+
+
+{% block content %}
+
+    <div class="article-thumbnail shadow">
+        <img class="article-thumbnail" src="{{ article.thumbnail.url }}" alt="">
+    </div>
+
+    <div class="jumbotron article-jumbotron shadow">
+
+        <div class="article-title">
+            {{ article.title }}
+        </div>
+
+        <div class="article-details">
+            <i class="fa fa-folder">
+                {% for category in article.category.all %}
+                    <a href="{% url 'blog:articles-by-category' category.slug %}">
+                        {{ category }}</a>{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </i>
+            <i class="fa fa-calendar-alt">&nbsp;<span>{{ article.date_posted | date:"M d, Y" }}</span></i>
+            <i class="fa fa-user">
+                <a href="{% url 'blog:articles-by-author' article.author %}">
+                    {% if article.author.first_name %}
+                        {{ article.author.first_name }} {{ article.author.last_name }}
+                    {% else %}
+                        {{ article.author.username }}
+                    {% endif %}
+                </a>
+            </i>
+
+            {% if article.tags.all %}
+                <br>
+                <i class="fa fa-tags">&nbsp;
+                {% for tag in article.tags.all %}
+                    <span class="badge my-tags shadow"><a href="{% url 'blog:articles-by-tag' tag.slug %}">{{ tag | title }}</a></span>
+                {% endfor %}
+                </i>
+            {% endif %}
+        </div>
+
+        <div class="article-body mt-4">
+            <p>{{ article.body | safe }}</p>
+        </div>
+
+    </div>
+
+    <!-- comments -->
+    {% include 'blog/partials/comments.html' %}
+
+{% endblock %}
+
+
+{% block comment_show_script %}
+    <script type="text/javascript">
+        $(document).ready(function(event) {
+            $('.reply-btn').click(function() {
+                $(this).parent().next('.reply-comment-form').fadeToggle()
+            });
+        });
+    </script>
+{% endblock %}
