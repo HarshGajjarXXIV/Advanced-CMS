@@ -21,15 +21,16 @@
 
 <h3>Steps to setup</h3>
 <ui>
-	<li>Open Terminal/CMD and enter these commands</li>
+	<li><b>Open Terminal/CMD and enter these commands</b></li>
 	<li>git clone https://github.com/HarshGajjarXXIV/Advanced-CMS.git</li>
 	<li>cd Advanced-CMS</li>
 	<li>pip install -r requirements.txt</li>
-	<li>python manage.py make migrations</li>
+	<li>python manage.py makemigrations</li>
 	<li>python manage.py migrate</li>
-	<li>python manage.py createsuperuser (Fillup the user details)</li>
+	<li>python manage.py loaddata fixtures.json</li>
+	<li>python manage.py createsuperuser</li>
 	<li>python manage.py runserver 127.0.0.1:8000</li>
-	<li>Now open browser and open "http://127.0.0.1:8000"</li>
+	<li><b>Now open browser and visit "http://127.0.0.1:8000"</b></li>
 </ui>
 
 <h3>Navigation</h3>

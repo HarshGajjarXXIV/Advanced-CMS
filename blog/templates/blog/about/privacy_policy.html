@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 
 
-{% block title %} Privacy Policy | Tsploit {% endblock %}
+{% block title %} Privacy Policy | {{ config.blog_name }} {% endblock %}
 
 
 {% block content %}
@@ -13,7 +13,7 @@
 
         <div class="body" >
 
-            <p>The privacy policy describes the kinds of information we may gather during your visit to Technosploit Site, how we use your information, when we might disclose your personally identifiable information, and how you can manage your information.</p>
+            <p>The privacy policy describes the kinds of information we may gather during your visit to CMS Blog Site, how we use your information, when we might disclose your personally identifiable information, and how you can manage your information.</p>
 
             <p>This privacy policy is subject to change without notice. Your continued use of our Sites following the posting of changes to these terms will mean you accept those changes. If you have any questions feel free to <a href="{% url 'blog:contact-us' %}">contact us.</a></p>
 

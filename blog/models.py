@@ -1,4 +1,5 @@
 from ckeditor_uploader.fields import RichTextUploadingField
+from ckeditor.fields import RichTextField
 from django.db import models
 from django.template.defaultfilters import slugify
 from taggit.managers import TaggableManager
@@ -7,9 +8,35 @@ from django.contrib.auth.models import User
 from PIL import Image
 
 
+class Configuration(models.Model):
+    blog_name = models.CharField(max_length=150)
+    blog_description = models.CharField(max_length=160)
+    blog_logo = models.ImageField(upload_to='logos', null=True, blank=True)
+    display_copyright_notice = models.BooleanField(default=False)
+    copyright_notice = models.CharField(max_length=200, null=True, blank=True)
+    twitter_link = models.URLField(null=True, blank=True)
+    instagram_link = models.URLField(null=True, blank=True)
+    facebook_link = models.URLField(null=True, blank=True)
+    display_about_us = models.BooleanField(default=False)
+    about_us = RichTextField(null=True, blank=True)
+    display_contact_us = models.BooleanField(default=False)
+    contact_us = RichTextField(null=True, blank=True)
+    display_privacy_policy = models.BooleanField(default=False)
+    privacy_policy = RichTextField(null=True, blank=True)
+    display_terms_of_service = models.BooleanField(default=False)
+    terms_of_service = RichTextField(null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        # only one object allowed
+        if self.__class__.objects.count():
+            self.pk = self.__class__.objects.first().pk
+        super().save(*args, **kwargs)
+
+
 class Category(models.Model):
     name = models.CharField(max_length=150, unique=True)
     slug = models.SlugField(unique=True)
+    description = models.CharField(max_length=160)
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
 
@@ -78,10 +105,10 @@ class Menu(models.Model):
 
     type = models.CharField(max_length=20, choices=TYPE, default='Separator')
     name = models.CharField(max_length=50)
-    category_link = models.ForeignKey(Category, max_length=200, blank=True, null=True, on_delete=models.CASCADE)
-    article_link = models.ForeignKey(Article, max_length=200, blank=True, null=True, on_delete=models.CASCADE)
-    author_link = models.ForeignKey(User, max_length=200, blank=True, null=True, on_delete=models.CASCADE)
-    external_url = models.URLField(max_length=200, null=True, blank=True)
+    category_link = models.ForeignKey(Category, blank=True, null=True, on_delete=models.CASCADE)
+    article_link = models.ForeignKey(Article, blank=True, null=True, on_delete=models.CASCADE)
+    author_link = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
+    external_url = models.URLField(null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -99,10 +126,10 @@ class SubMenu(models.Model):
     type = models.CharField(max_length=20, choices=TYPE, default='Category')
     name = models.CharField(max_length=50)
     parent_menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
-    category_link = models.ForeignKey(Category, max_length=200, blank=True, null=True, on_delete=models.CASCADE)
-    article_link = models.ForeignKey(Article, max_length=200, blank=True, null=True, on_delete=models.CASCADE)
-    author_link = models.ForeignKey(User, max_length=200, blank=True, null=True, on_delete=models.CASCADE)
-    external_url = models.URLField(max_length=200, null=True, blank=True)
+    category_link = models.ForeignKey(Category, blank=True, null=True, on_delete=models.CASCADE)
+    article_link = models.ForeignKey(Article, blank=True, null=True, on_delete=models.CASCADE)
+    author_link = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
+    external_url = models.URLField(null=True, blank=True)
 
     def __str__(self):
         return self.name

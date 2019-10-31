@@ -37,12 +37,13 @@
                 {% endif %}
 
                 <div class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         <img class="avatar" src="{{ user.profile.profile_pic.url }}" alt=""> {{ user.username }}
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{% url 'author:profile' %}">Profile</a>
                         {% if request.user.is_superuser %}
+                            <a class="dropdown-item" href="{% url 'author:config-update' pk=1 %}">Manage Configurations</a>
                             <a class="dropdown-item" href="{% url 'author:menu-list' %}">Manage Menus</a>
                             <a class="dropdown-item" href="{% url 'author:category-list' %}">Manage Categories</a>
                             <a class="dropdown-item" href="{% url 'author:author-list' %}">Manage Authors</a>

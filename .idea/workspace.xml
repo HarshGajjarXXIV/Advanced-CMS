@@ -2,8 +2,41 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9e138484-6682-4b9f-86cb-820c3b0acabc" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/codesmith.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/codesmith.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/author/templates/author/article/article_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/author/templates/author/article/article_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/author/templates/author/menu/menu_confirm_delete.html" beforeDir="false" afterPath="$PROJECT_DIR$/author/templates/author/config/menu_confirm_delete.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/author/templates/author/menu/menu_create.html" beforeDir="false" afterPath="$PROJECT_DIR$/author/templates/author/config/menu_create.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/author/templates/author/menu/menu_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/author/templates/author/config/menu_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/author/templates/author/partials/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/author/templates/author/partials/navbar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/author/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/author/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/author/views/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/author/views/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/author/views/category_views.py" beforeDir="false" afterPath="$PROJECT_DIR$/author/views/category_views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/author/views/menu_views.py" beforeDir="false" afterPath="$PROJECT_DIR$/author/views/menu_views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/author/views/message_views.py" beforeDir="false" afterPath="$PROJECT_DIR$/author/views/message_views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/templates/blog/about/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/about/about.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/templates/blog/about/contact.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/about/contact.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/templates/blog/about/privacy_policy.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/about/privacy_policy.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/templates/blog/about/terms.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/about/terms.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/templates/blog/article/article_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/article/article_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/templates/blog/article/articles_by_author.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/article/articles_by_author.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/templates/blog/article/articles_by_category.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/article/articles_by_category.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/templates/blog/article/articles_by_tag.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/article/articles_by_tag.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/templates/blog/article/homepage.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/article/homepage.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/templates/blog/partials/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/partials/footer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/templates/blog/partials/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/partials/navbar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/templates/blog/partials/sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/partials/sidebar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cms/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/cms/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/blog/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/blog/css/style.css" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -57,8 +90,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="package.json" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -66,7 +100,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1OYyXreolmi9aqIoSBtgxtBbwk6" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -75,7 +111,7 @@
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -86,19 +122,19 @@
     </option>
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/author/templates/author/article" />
-      <recent name="$PROJECT_DIR$/author/templates/author/config" />
-      <recent name="$PROJECT_DIR$/static" />
-      <recent name="$PROJECT_DIR$/blog/static" />
-      <recent name="$PROJECT_DIR$/author/templates/author/auth" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/static" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/media/logos" />
       <recent name="$PROJECT_DIR$/author/templates/author/config" />
       <recent name="$PROJECT_DIR$/blog/static" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/author/templates/author/config" />
+      <recent name="$PROJECT_DIR$/author/templates/author/article" />
+      <recent name="$PROJECT_DIR$/static" />
+      <recent name="$PROJECT_DIR$/blog/static" />
+      <recent name="$PROJECT_DIR$/author/templates/author/auth" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -124,7 +160,7 @@
     </option>
   </component>
   <component name="SvnConfiguration">
-    <configuration />
+    <configuration>$USER_HOME$/.subversion</configuration>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -213,7 +249,15 @@
       <workItem from="1567443594746" duration="5805000" />
       <workItem from="1568379469791" duration="203000" />
       <workItem from="1568379806363" duration="1838000" />
-      <workItem from="1568529041449" duration="1493000" />
+      <workItem from="1568529041449" duration="2139000" />
+      <workItem from="1569168758891" duration="1171000" />
+      <workItem from="1569669414777" duration="7986000" />
+      <workItem from="1569764689643" duration="4359000" />
+      <workItem from="1570194581003" duration="266000" />
+      <workItem from="1570195063479" duration="3621000" />
+      <workItem from="1570295927161" duration="4490000" />
+      <workItem from="1570337627893" duration="6967000" />
+      <workItem from="1572542485404" duration="324000" />
     </task>
     <servers />
   </component>
@@ -225,7 +269,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

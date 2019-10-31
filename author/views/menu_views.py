@@ -19,7 +19,7 @@ from django.views.generic import (
 class MenuList(ListView):
     model = Menu
     context_object_name = 'menus'
-    template_name = 'author/menu/menu_list.html'
+    template_name = 'author/config/menu_list.html'
 
     def test_func(self):
         if self.request.user.is_superuser:
@@ -42,7 +42,7 @@ class MenuList(ListView):
 
 class MenuCreate(CreateView):
     form_class = MenuAddForm
-    template_name = 'author/menu/menu_create.html'
+    template_name = 'author/config/menu_create.html'
     success_url = reverse_lazy('author:menu-list')
 
     def test_func(self):
@@ -97,7 +97,7 @@ class MenuUpdate(UpdateView):
     model = Menu
     form_class = MenuAddForm
     success_url = reverse_lazy('author:menu-list')
-    template_name = 'author/menu/menu_create.html'
+    template_name = 'author/config/menu_create.html'
 
     def test_func(self):
         if self.request.user.is_superuser:
@@ -149,7 +149,7 @@ class MenuUpdate(UpdateView):
 
 class MenuDelete(DeleteView):
     model = Menu
-    template_name = 'author/menu/menu_confirm_delete.html'
+    template_name = 'author/config/menu_confirm_delete.html'
     success_url = reverse_lazy('author:menu-list')
     success_message = 'Menu has been deleted successfully'
 
@@ -167,7 +167,7 @@ class MenuDelete(DeleteView):
 class SubMenuCreate(CreateView):
     form_class = SubMenuAddForm
     success_url = reverse_lazy('author:menu-list')
-    template_name = 'author/menu/menu_create.html'
+    template_name = 'author/config/menu_create.html'
 
     def test_func(self):
         if self.request.user.is_superuser:
@@ -221,7 +221,7 @@ class SubMenuUpdate(UpdateView):
     model = SubMenu
     form_class = SubMenuAddForm
     success_url = reverse_lazy('author:menu-list')
-    template_name = 'author/menu/menu_create.html'
+    template_name = 'author/config/menu_create.html'
 
     def test_func(self):
         if self.request.user.is_superuser:
@@ -273,7 +273,7 @@ class SubMenuUpdate(UpdateView):
 
 class SubMenuDelete(DeleteView):
     model = SubMenu
-    template_name = 'author/menu/menu_confirm_delete.html'
+    template_name = 'author/config/menu_confirm_delete.html'
     success_url = reverse_lazy('author:menu-list')
     success_message = 'Sub-Menu has been deleted successfully'
 

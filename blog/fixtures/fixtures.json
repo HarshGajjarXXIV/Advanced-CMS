@@ -1,0 +1,24 @@
+[
+  {
+    "model": "blog.Configuration",
+    "pk": 1,
+    "fields": {
+      "blog_name": "CMS Blog",
+      "blog_description": "This is an advanced CMS blog",
+      "blog_logo": "defaults/logo_default.png",
+      "display_copyright_notice": 0,
+      "copyright_notice": "",
+      "twitter_link": "",
+      "instagram_link": "",
+      "facebook_link": "",
+      "display_about_us": 0,
+      "about_us": "",
+      "display_contact_us": 0,
+      "contact_us": "",
+      "display_privacy_policy": 0,
+      "privacy_policy": "",
+      "display_terms_of_service": 0,
+      "terms_of_service": ""
+    }
+  }
+]

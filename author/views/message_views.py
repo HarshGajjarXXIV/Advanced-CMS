@@ -1,26 +1,12 @@
 from django.urls import reverse_lazy
 from blog.models import Message
-from django.shortcuts import redirect
 from django.contrib import messages
-from blog.forms import MessageAddForm
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (
     ListView,
     DetailView,
-    CreateView,
     DeleteView
 )
-
-
-class MessageForm(CreateView):
-    form_class = MessageAddForm
-    template_name = 'blog/about/contact.html'
-
-    def form_valid(self, form):
-        form.instance.ip_address = self.request.META['REMOTE_ADDR']  # get_ip(self.request)
-        form.save()
-        messages.success(self.request, 'Your message has been sent successfully')
-        return redirect('blog:contact-us')
 
 
 class MessageList(LoginRequiredMixin, UserPassesTestMixin, ListView):

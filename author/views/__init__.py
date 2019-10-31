@@ -1,3 +1,4 @@
+from .config_view import *
 from .article_views import *
 from .author_views import *
 from .category_views import *

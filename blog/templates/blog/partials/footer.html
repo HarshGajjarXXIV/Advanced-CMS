@@ -2,36 +2,61 @@
 
 <footer class="footer mt-4">
     <div class="container">
+
         <div class="row">
             <div class="col-12">
                 <h2 class="logo">
                     <a href="{% url 'blog:homepage' %}">
-                        <img src="/media/logos/t_sploit_white.png" alt="">
+                        {% if config.blog_logo %}
+                            <img src="{{ config.blog_logo.url }}" alt="">
+                        {% else %}
+                            <img src="/media/defaults/logo_default.png" alt="">
+                        {% endif %}
                     </a>
                 </h2>
             </div>
         </div>
+
         <div class="row">
             <div class="col-12">
                 <ul>
-                    <li><a href="{% url 'blog:about-us' %}">About Us</a></li>
-                    <li><a href="{% url 'blog:contact-us' %}">Contact Us</a></li>
-                    <li><a href="{% url 'blog:privacy-policy' %}">Privacy Policy</a></li>
-                    <li><a href="{% url 'blog:terms' %}">Terms of Service</a></li>
+                    {% if config.display_about_us %}
+                        <li><a href="{% url 'blog:about-us' %}">About Us</a></li>
+                    {% endif %}
+                    {% if config.display_contact_us %}
+                        <li><a href="{% url 'blog:contact-us' %}">Contact Us</a></li>
+                    {% endif %}
+                    {% if config.display_privacy_policy %}
+                        <li><a href="{% url 'blog:privacy-policy' %}">Privacy Policy</a></li>
+                    {% endif %}
+                    {% if config.display_terms_of_service %}
+                        <li><a href="{% url 'blog:terms' %}">Terms of Service</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
+
         <div class="row">
             <div class="col-12">
                 <div class="social-networks">
-                    <a href="#" target="_blank" class="twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="#" target="_blank" class="instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" target="_blank" class="facebook"><i class="fab fa-facebook"></i></a>
+                    {% if config.twitter_link %}
+                        <a href="{{ config.twitter_link }}" target="_blank" class="twitter"><i class="fab fa-twitter"></i></a>
+                    {% endif %}
+                    {% if config.instagram_link %}
+                        <a href="{{ config.instagram_link }}" target="_blank" class="instagram"><i class="fab fa-instagram"></i></a>
+                    {% endif %}
+                    {% if config.facebook_link %}
+                        <a href="{{ config.facebook_link }}" target="_blank" class="facebook"><i class="fab fa-facebook"></i></a>
+                    {% endif %}
                 </div>
             </div>
         </div>
+
     </div>
-    <div class="footer-copyright">
-        <p>© 2019 Copyright TechSploit | Designed & Developed by <a href="#">Harsh Patvana</a> from '<b>Scratch</b>' </p>
-    </div>
+
+    {% if config.display_copyright_notice %}
+        <div class="footer-copyright">
+            <p>{{ config.copyright_notice }}</p>
+        </div>
+    {% endif %}
 </footer>

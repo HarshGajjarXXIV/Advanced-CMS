@@ -65,7 +65,7 @@ CKEDITOR_CONFIGS = {
                 'Maximize', 'ShowBlocks', 'Preview',
             ],
         ],
-        'height': 1000,
+        'height': 200,
         'extraPlugins': 'codesnippet',
     },
 }

@@ -2,7 +2,7 @@
 
 
 {% block title %}
-    {% if request.path == '/apollo/' %}
+    {% if request.path == '/admin/' %}
        Articles
     {% elif '/article/draft/' in request.path %}
        Drafts
@@ -16,7 +16,7 @@
 
 {% block content %}
 
-    {% if request.path == '/apollo/' %}
+    {% if request.path == '/admin/' %}
         <div class="row">
             <div class="col-lg-10">
                 <h3>Articles By You ({{ paginator.count }})</h3>

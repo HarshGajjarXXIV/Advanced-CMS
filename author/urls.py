@@ -10,6 +10,8 @@ urlpatterns = [
 
     path('', views.Homepage.as_view(), name='homepage'),
 
+    path('configs/<int:pk>/', views.ConfigUpdate.as_view(), name='config-update'),
+
     path('article/<int:pk>/', views.ArticleDetail.as_view(), name='article-detail'),
     path('article/all/', views.ArticleAll.as_view(), name='article-all'),
     path('article/add/', views.ArticleCreate.as_view(), name='article-create'),

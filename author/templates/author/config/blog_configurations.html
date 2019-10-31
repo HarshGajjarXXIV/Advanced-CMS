@@ -1,0 +1,22 @@
+{% extends 'author/main/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Blog Configurations {% endblock %}
+
+{% block content %}
+    <h3>Blog Configurations</h3>
+    <div class="row justify-content-md-center">
+        <div class="col-md-12">
+            <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    {{ form.media }}
+                    {{ form | crispy }}
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-primary" type="submit">Update Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

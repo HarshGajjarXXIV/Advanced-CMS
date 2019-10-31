@@ -7,7 +7,7 @@
             {{ author.first_name }} {{ author.last_name }}
         {% else %}
             {{ author.username }}
-        {% endif %} | Tsploit
+        {% endif %} | {{ config.blog_name }}
     {% endwith %}
 {% endblock %}
 

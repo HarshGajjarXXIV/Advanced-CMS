@@ -5,10 +5,11 @@ from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic.edit import FormMixin
 from taggit.models import Tag
-from .models import Article, Comment, Category, Menu
+from .models import Article, Comment, Category, Menu, SubMenu, Configuration
 from django.contrib import messages
-from .forms import CommentAddForm
+from .forms import CommentAddForm, MessageAddForm
 from django.views.generic import (
+    CreateView,
     ListView,
     DetailView,
     TemplateView
@@ -18,7 +19,6 @@ from django.views.generic import (
 class Homepage(ListView):
     context_object_name = 'articles'
     template_name = 'blog/article/homepage.html'
-    # paginate_by = 5
 
     def get_queryset(self):
 
@@ -26,13 +26,15 @@ class Homepage(ListView):
             search_term = self.request.GET['s']
 
             articles = Article.objects.filter(Q(slug__icontains=search_term) |
+                                              Q(title__icontains=search_term) |
                                               Q(category__slug__icontains=search_term) |
+                                              Q(category__name__icontains=search_term) |
                                               Q(author__username__icontains=search_term) |
                                               Q(author__first_name__icontains=search_term) |
                                               Q(author__last_name__icontains=search_term) |
                                               Q(tags__name__icontains=search_term) |
                                               Q(date_posted__icontains=search_term)
-                                              ).order_by('-date_posted')
+                                              ).order_by('-date_posted').distinct()
 
         else:
             articles = Article.objects.filter(is_posted=True).order_by('-date_posted')
@@ -51,13 +53,17 @@ class Homepage(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(Homepage, self).get_context_data(**kwargs)
-        # menus = Menu.objects.filter(parent_menu=None)
+        config = Configuration.objects.first()
+        menus = Menu.objects.annotate(sub_count=Count('submenu')).order_by('id')
+        sub_menus = SubMenu.objects.all()
         categories = Category.objects.all()
         tags = Tag.objects.all().annotate(num_times=Count('article')).order_by('-num_times')[:50]
         featured_articles = Article.objects.filter(is_featured=True)[:5]
         context.update({
+            'config': config,
             'categories': categories,
-            # 'menus': menus,
+            'menus': menus,
+            'sub_menus': sub_menus,
             'tags': tags,
             'featured_articles': featured_articles
         })
@@ -81,6 +87,7 @@ class ArticleDetail(FormMixin, DetailView):
         temp_article = get_object_or_404(Article, slug=self.kwargs['slug'])
         context = super(ArticleDetail, self).get_context_data(**kwargs)
 
+        config = Configuration.objects.first()
         comments = Comment.objects.filter(
             article=temp_article,
             reply=None,
@@ -91,6 +98,7 @@ class ArticleDetail(FormMixin, DetailView):
         featured_articles = Article.objects.filter(is_featured=True)[:5]
 
         context.update({
+            'config': config,
             'comments': comments,
             'form': form,
             'categories': categories,
@@ -145,12 +153,19 @@ class ArticlesByCategory(ListView):
     def get_context_data(self, **kwargs):
         category = get_object_or_404(Category, slug=self.kwargs['slug'])
         context = super(ArticlesByCategory, self).get_context_data(**kwargs)
+
+        config = Configuration.objects.first()
         categories = Category.objects.all()
+        menus = Menu.objects.annotate(sub_count=Count('submenu')).order_by('id')
+        sub_menus = SubMenu.objects.all()
         tags = Tag.objects.all().annotate(num_times=Count('article')).order_by('-num_times')[:50]
         featured_articles = Article.objects.filter(is_featured=True)[:5]
         context.update({
+            'config': config,
             'category': category,
             'categories': categories,
+            'menus': menus,
+            'sub_menus': sub_menus,
             'tags': tags,
             'featured_articles': featured_articles
         })
@@ -181,12 +196,19 @@ class ArticlesByTag(ListView):
     def get_context_data(self, **kwargs):
         tag = get_object_or_404(Tag, slug=self.kwargs['slug'])
         context = super(ArticlesByTag, self).get_context_data(**kwargs)
+
+        config = Configuration.objects.first()
         categories = Category.objects.all()
+        menus = Menu.objects.annotate(sub_count=Count('submenu')).order_by('id')
+        sub_menus = SubMenu.objects.all()
         tags = Tag.objects.all().annotate(num_times=Count('article')).order_by('-num_times')[:50]
         featured_articles = Article.objects.filter(is_featured=True)[:5]
         context.update({
+            'config': config,
             'tag': tag,
             'categories': categories,
+            'menus': menus,
+            'sub_menus': sub_menus,
             'tags': tags,
             'featured_articles': featured_articles
         })
@@ -216,15 +238,22 @@ class ArticlesByAuthor(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(ArticlesByAuthor, self).get_context_data(**kwargs)
+
+        config = Configuration.objects.first()
         author = get_object_or_404(User, username=self.kwargs['slug'])
         comments = Comment.objects.filter(author__username=self.kwargs['slug'])
         categories = Category.objects.all()
+        menus = Menu.objects.annotate(sub_count=Count('submenu')).order_by('id')
+        sub_menus = SubMenu.objects.all()
         tags = Tag.objects.all().annotate(num_times=Count('article')).order_by('-num_times')[:50]
         featured_articles = Article.objects.filter(is_featured=True)[:5]
         context.update({
+            'config': config,
             'author': author,
             'comments': comments,
             'categories': categories,
+            'menus': menus,
+            'sub_menus': sub_menus,
             'tags': tags,
             'featured_articles': featured_articles
         })
@@ -234,10 +263,73 @@ class ArticlesByAuthor(ListView):
 class AboutView(TemplateView):
     template_name = 'blog/about/about.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(AboutView, self).get_context_data(**kwargs)
+
+        config = Configuration.objects.first()
+        menus = Menu.objects.annotate(sub_count=Count('submenu')).order_by('id')
+        sub_menus = SubMenu.objects.all()
+        context.update({
+            'config': config,
+            'menus': menus,
+            'sub_menus': sub_menus,
+        })
+        return context
+
+
+class ContactView(CreateView):
+    form_class = MessageAddForm
+    template_name = 'blog/about/contact.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ContactView, self).get_context_data(**kwargs)
+
+        config = Configuration.objects.first()
+        menus = Menu.objects.annotate(sub_count=Count('submenu')).order_by('id')
+        sub_menus = SubMenu.objects.all()
+        context.update({
+            'config': config,
+            'menus': menus,
+            'sub_menus': sub_menus,
+        })
+        return context
+
+    def form_valid(self, form):
+        form.instance.ip_address = self.request.META['REMOTE_ADDR']  # get_ip(self.request)
+        form.save()
+        messages.success(self.request, 'Your message has been sent successfully')
+        return redirect('blog:contact-us')
+
 
 class PrivacyView(TemplateView):
     template_name = 'blog/about/privacy_policy.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(PrivacyView, self).get_context_data(**kwargs)
+
+        config = Configuration.objects.first()
+        menus = Menu.objects.annotate(sub_count=Count('submenu')).order_by('id')
+        sub_menus = SubMenu.objects.all()
+        context.update({
+            'config': config,
+            'menus': menus,
+            'sub_menus': sub_menus,
+        })
+        return context
+
 
 class TermsView(TemplateView):
     template_name = 'blog/about/terms.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(TermsView, self).get_context_data(**kwargs)
+
+        config = Configuration.objects.first()
+        menus = Menu.objects.annotate(sub_count=Count('submenu')).order_by('id')
+        sub_menus = SubMenu.objects.all()
+        context.update({
+            'config': config,
+            'menus': menus,
+            'sub_menus': sub_menus,
+        })
+        return context

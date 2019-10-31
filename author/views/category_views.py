@@ -27,7 +27,7 @@ class CategoryList(LoginRequiredMixin, UserPassesTestMixin, ListView):
 
 class CategoryCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Category
-    fields = ['name']
+    fields = ['name', 'description']
     template_name = 'author/category/category_create.html'
 
     def test_func(self):
@@ -44,7 +44,7 @@ class CategoryCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
 class CategoryUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Category
-    fields = ['name']
+    fields = ['name', 'description']
     template_name = 'author/category/category_create.html'
 
     def test_func(self):

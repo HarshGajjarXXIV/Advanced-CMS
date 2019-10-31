@@ -2,7 +2,11 @@
     <div class="container">
 
         <a class="navbar-brand" href="{% url 'blog:homepage' %}">
-            <img src="/media/defaults/logo_default.png" alt="">
+            {% if config.blog_logo %}
+                <img src="{{ config.blog_logo.url }}" alt="">
+            {% else %}
+                <img src="/media/defaults/logo_default.png" alt="">
+            {% endif %}
         </a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,69 +27,79 @@
                     </a>
                 </li>
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle
-                        {% if '/category/android/' in request.path or '/category/apps-games/' in request.path  or '/category/ios/' in request.path %}
-                            active
-                        {% endif %}"
-                        href="#" data-toggle="dropdown">
-                        Mobile
-                    </a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item
-                            {% if '/category/android/' in request.path %}
-                                active
-                            {% endif %}"
-                           href="{% url 'blog:articles-by-category' 'android' %}">Android
-                        </a>
-                        <a class="dropdown-item
-                            {% if '/category/ios/' in request.path %}
-                                active
-                            {% endif %}"
-                           href="{% url 'blog:articles-by-category' 'ios' %}">iOS
-                        </a>
-                        <a class="dropdown-item
-                            {% if '/category/apps-games/' in request.path %}
-                                active
-                            {% endif %}"
-                           href="{% url 'blog:articles-by-category' 'apps-games' %}">Apps & Games
-                        </a>
-                    </div>
-                </li>
+                {% for menu in menus %}
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle
-                        {% if '/category/linux/' in request.path or '/category/windows/' in request.path %}
-                            active
-                        {% endif %}"
-                        href="#" data-toggle="dropdown">
-                        Computer
-                    </a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item
-                            {% if '/category/linux/' in request.path %}
-                                active
-                            {% endif %}"
-                           href="{% url 'blog:articles-by-category' 'linux' %}">Linux
-                        </a>
-                        <a class="dropdown-item
-                            {% if '/category/windows/' in request.path %}
-                                active
-                            {% endif %}"
-                           href="{% url 'blog:articles-by-category' 'windows' %}">Windows
-                        </a>
-                    </div>
-                </li>
+                        {% if menu.sub_count > 0 %}
 
-                 <li class="nav-item">
-                    <a class="nav-link
-                        {% if '/category/cyber-security/' in request.path %}
-                            active
-                        {% endif %}"
-                        href="{% url 'blog:articles-by-category' 'cyber-security' %}">
-                        Cyber Security<span class="sr-only"></span>
-                    </a>
-                </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle {% if menu.name in request.path %} active {% endif %}"
+                                    href="
+                                        {% if menu.type == "Category" %}
+                                            {% url 'blog:articles-by-category' menu.category_link.slug %}
+                                        {% elif menu.type == "Article" %}
+                                            {% url 'blog:article-detail' slug=menu.article_link.slug %}
+                                        {% elif menu.type == "Author" %}
+                                            {% url 'blog:articles-by-author' menu.author_link %}
+                                        {% elif menu.type == "Separator" %}
+                                            #
+                                        {% elif menu.type == "URL" %}
+                                             {{ menu.external_url }}
+                                        {% endif %}">
+                                    {{ menu.name }}
+                                </a>
+                                <div class="dropdown-menu">
+
+                                    {% for sub_menu in sub_menus %}
+                                        {% if sub_menu.parent_menu == menu %}
+
+                                            <a class="dropdown-item"
+                                                href="
+                                                   {% if sub_menu.type == "Category" %}
+                                                       {% url 'blog:articles-by-category' sub_menu.category_link.slug %}
+                                                   {% elif sub_menu.type == "Article" %}
+                                                        {% url 'blog:article-detail' slug=sub_menu.article_link.slug %}
+                                                   {% elif sub_menu.type == "Author" %}
+                                                        {% url 'blog:articles-by-author' sub_menu.author_link %}
+                                                   {% elif sub_menu.type == "Separator" %}
+                                                       #
+                                                   {% elif sub_menu.type == "URL" %}
+                                                        {{ sub_menu.external_url }}
+                                                   {% endif %}">
+                                                {{ sub_menu.name }}
+                                            </a>
+
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </li>
+
+                        {% else %}
+
+                            <li class="nav-item">
+                                <a class="nav-link
+                                    {% if '/category/cyber-security/' in request.path %}
+                                        active
+                                    {% endif %}"
+                                    href="
+                                        {% if menu.type == "Category" %}
+                                            {% url 'blog:articles-by-category' menu.category_link.slug %}
+                                        {% elif menu.type == "Article" %}
+                                            {% url 'blog:article-detail' slug=menu.article_link.slug %}
+                                        {% elif menu.type == "Author" %}
+                                            {% url 'blog:articles-by-author' menu.author_link %}
+                                        {% elif menu.type == "Separator" %}
+                                            #
+                                        {% elif menu.type == "URL" %}
+                                             {{ menu.external_url }}
+                                        {% endif %}
+                                    ">
+                                    {{ menu.name }}<span class="sr-only"></span>
+                                </a>
+                            </li>
+
+                        {% endif %}
+
+                {% endfor %}
 
                  <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="" data-toggle="dropdown">
