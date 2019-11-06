@@ -1,7 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9e138484-6682-4b9f-86cb-820c3b0acabc" name="Default Changelist" comment="" />
+    <list default="true" id="9e138484-6682-4b9f-86cb-820c3b0acabc" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/author/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/author/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/author/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/author/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/author/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/author/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/author/templates/author/partials/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/author/templates/author/partials/navbar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/author/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/author/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/author/views/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/author/views/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/author/views/config_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/author/views/config_view.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/fixtures/fixtures.json" beforeDir="false" afterPath="$PROJECT_DIR$/blog/fixtures/fixtures.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/templates/blog/about/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/about/about.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/templates/blog/about/contact.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/about/contact.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/templates/blog/about/privacy_policy.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/about/privacy_policy.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/templates/blog/about/terms.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/about/terms.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/templates/blog/partials/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/partials/footer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/templates/blog/partials/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/partials/navbar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/defaults/logo_default.png" beforeDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,9 +72,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
-        <option value="HTML File" />
         <option value="package.json" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -221,7 +239,8 @@
       <workItem from="1570195063479" duration="3621000" />
       <workItem from="1570295927161" duration="4490000" />
       <workItem from="1570337627893" duration="6967000" />
-      <workItem from="1572542485404" duration="805000" />
+      <workItem from="1572542485404" duration="1416000" />
+      <workItem from="1573015836412" duration="9468000" />
     </task>
     <servers />
   </component>

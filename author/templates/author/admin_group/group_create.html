@@ -1,0 +1,25 @@
+{% extends 'author/main/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Add Admin Group {% endblock %}
+
+{% block content %}
+    <div class="row justify-content-md-center">
+        <div class="col-md-10">
+            <div class="jumbotron shadow">
+                <div class="container">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <fieldset class="form-group">
+                            {{ form | crispy }}
+                        </fieldset>
+                        <div class="form-group">
+                            <button class="btn btn-primary" type="submit">Add / Update Group</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

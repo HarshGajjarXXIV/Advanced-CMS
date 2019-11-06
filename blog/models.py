@@ -9,9 +9,8 @@ from PIL import Image
 
 
 class Configuration(models.Model):
-    blog_name = models.CharField(max_length=150)
+    blog_name = models.CharField(max_length=25)
     blog_description = models.CharField(max_length=160)
-    blog_logo = models.ImageField(upload_to='logos', null=True, blank=True)
     display_copyright_notice = models.BooleanField(default=False)
     copyright_notice = models.CharField(max_length=200, null=True, blank=True)
     twitter_link = models.URLField(null=True, blank=True)

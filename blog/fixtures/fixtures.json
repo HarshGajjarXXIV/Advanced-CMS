@@ -5,7 +5,6 @@
     "fields": {
       "blog_name": "CMS Blog",
       "blog_description": "This is an advanced CMS blog",
-      "blog_logo": "defaults/logo_default.png",
       "display_copyright_notice": 0,
       "copyright_notice": "",
       "twitter_link": "",

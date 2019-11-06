@@ -1,11 +1,20 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from PIL import Image
 
 
-# extending user model with profile model
+# extending group model with GroupDescription model
+class GroupDescription(models.Model):
+    group = models.OneToOneField(Group, on_delete=models.CASCADE)
+    description = models.TextField(max_length=260)
+
+    def __str__(self):
+        return self.description
+
+
+# extending user model with Profile model
 class Profile(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)

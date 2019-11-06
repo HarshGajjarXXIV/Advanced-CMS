@@ -44,6 +44,11 @@ urlpatterns = [
     path('profile/update/', views.edit_profile, name='profile-update'),
     # path('profile/edit/', views.ProfileUpdate.as_view(), name='profile-update'),
 
+    path('groups/', views.GroupList.as_view(), name='group-list'),
+    path('groups/add/', views.GroupCreate.as_view(), name='group-create'),
+    path('groups/<int:pk>/delete/', views.GroupDelete.as_view(), name='group-delete'),
+    path('groups/<int:pk>/update/', views.GroupUpdate.as_view(), name='group-update'),
+
     path('messages/', views.MessageList.as_view(), name='message-list'),
     path('messages/<int:pk>/', views.MessageDetail.as_view(), name='message-detail'),
     path('messages/<int:pk>/delete/', views.MessageDelete.as_view(), name='message-delete'),

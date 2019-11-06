@@ -2,10 +2,10 @@
     <div class="container">
 
         <a class="navbar-brand" href="{% url 'blog:homepage' %}">
-            {% if config.blog_logo %}
-                <img src="{{ config.blog_logo.url }}" alt="">
+            {% if config.blog_name %}
+                {{ config.blog_name }}
             {% else %}
-                <img src="/media/defaults/logo_default.png" alt="">
+                CMS
             {% endif %}
         </a>
 
@@ -101,42 +101,59 @@
 
                 {% endfor %}
 
-                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="" data-toggle="dropdown">
-                        More
-                    </a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item
-                            {% if '/about/' in request.path %}
-                                active
-                            {% endif %}"
-                           href="{% url 'blog:about-us' %}">About Us
+                {% if config.display_about_us or config.display_contact_us or config.display_privacy_policy or config.display_terms_of_service %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="" data-toggle="dropdown">
+                            More
                         </a>
-                        <a class="dropdown-item
-                            {% if '/contact/' in request.path %}
-                                active
-                            {% endif %}"
-                           href="{% url 'blog:contact-us' %}">Contact Us
-                        </a>
-                        <a class="dropdown-item
-                            {% if '/privacy-policy/' in request.path %}
-                                active
-                            {% endif %}"
-                           href="{% url 'blog:privacy-policy' %}">Privacy Policy
-                        </a>
-                        <a class="dropdown-item
-                            {% if '/terms/' in request.path %}
-                                active
-                            {% endif %}"
-                           href="{% url 'blog:terms' %}">Terms of Service
-                        </a>
-                    </div>
-                </li>
+
+                        <div class="dropdown-menu">
+
+                            {% if config.display_about_us %}
+                                <a class="dropdown-item
+                                    {% if '/about/' in request.path %}
+                                        active
+                                    {% endif %}"
+                                   href="{% url 'blog:about-us' %}">About Us
+                                </a>
+                            {% endif %}
+
+                            {% if config.display_contact_us %}
+                                <a class="dropdown-item
+                                    {% if '/contact/' in request.path %}
+                                        active
+                                    {% endif %}"
+                                   href="{% url 'blog:contact-us' %}">Contact Us
+                                </a>
+                            {% endif %}
+
+                            {% if config.display_privacy_policy %}
+                                <a class="dropdown-item
+                                    {% if '/privacy-policy/' in request.path %}
+                                        active
+                                    {% endif %}"
+                                   href="{% url 'blog:privacy-policy' %}">Privacy Policy
+                                </a>
+                            {% endif %}
+
+                            {% if config.display_terms_of_service %}
+                                <a class="dropdown-item
+                                    {% if '/terms/' in request.path %}
+                                        active
+                                    {% endif %}"
+                                   href="{% url 'blog:terms' %}">Terms of Service
+                                </a>
+                            {% endif %}
+
+                        </div>
+                    </li>
+                {% endif %}
+
             </ul>
 
             <form class="form-inline my-2 my-lg-0" method="get" action="{% url 'blog:homepage' %}">
                 <input class="form-control mr-sm-2" name="s" type="search" placeholder="Search" aria-label="Search" required>
-                <button class="btn btn-dark my-2 my-sm-0" type="submit"><i class="fa fa-search"></i> Search</button>
+                <button class="btn btn-dark my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
             </form>
 
         </div>

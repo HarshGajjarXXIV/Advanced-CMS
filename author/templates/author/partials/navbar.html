@@ -2,7 +2,7 @@
     <div class="container">
 
         <a class="navbar-brand" href="{% url 'author:homepage' %}">
-            <img src="/media/defaults/logo_default.png" alt="">
+            Admin Panel
         </a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,6 +46,7 @@
                             <a class="dropdown-item" href="{% url 'author:config-update' pk=1 %}">Manage Configurations</a>
                             <a class="dropdown-item" href="{% url 'author:menu-list' %}">Manage Menus</a>
                             <a class="dropdown-item" href="{% url 'author:category-list' %}">Manage Categories</a>
+                            <a class="dropdown-item" href="{% url 'author:group-list' %}">Manage Admin Groups</a>
                             <a class="dropdown-item" href="{% url 'author:author-list' %}">Manage Authors</a>
                         {% endif %}
                         <a class="dropdown-item" href="{% url 'author:logout' %}">Logout</a>

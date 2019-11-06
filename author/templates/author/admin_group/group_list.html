@@ -1,0 +1,40 @@
+{% extends 'author/main/base.html' %}
+
+{% block title %} Admin Groups {% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-lg-10">
+            <h3>Admin Groups</h3>
+        </div>
+        <div class="col-lg-2">
+            <a class="btn btn-primary btn-block" href="{% url 'author:group-create' %}">Add Group</a>
+        </div>
+    </div>
+
+    <table class="table table-sm mt-4">
+         <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th colspan="2">Actions</th>
+            </tr>
+         </thead>
+
+         {% for group in groups %}
+             <tbody>
+                <tr>
+                    <td>{{ group.id }}</td>
+                    <td>{{ group.name }}</td>
+                    <td>{{ group.groupdescription }}</td>
+                    <td><a href="{% url 'author:group-update' group.id %}">Edit</a></td>
+                    <td><a href="{% url 'author:group-delete' group.id %}">Delete</a></td>
+                </tr>
+             </tbody>
+         {% endfor %}
+    </table>
+
+
+{% endblock %}

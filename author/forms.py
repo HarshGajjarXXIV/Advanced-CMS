@@ -1,8 +1,22 @@
 from django import forms
-from django.contrib.auth.models import User
-from .models import Profile
-from blog.models import Article, Comment, Menu, SubMenu, Category
+from django.contrib.auth.models import User, Group
+from .models import Profile, GroupDescription
+from blog.models import Article, Comment, Menu, SubMenu, Category, Configuration
 from django.contrib.auth.forms import UserCreationForm
+from betterforms.multiform import MultiModelForm
+
+
+class ConfigForm(forms.ModelForm):
+
+    class Meta:
+        model = Configuration
+        fields = ['blog_name', 'blog_description',
+                  'display_copyright_notice', 'copyright_notice',
+                  'twitter_link', 'instagram_link', 'facebook_link',
+                  'display_about_us', 'about_us',
+                  'display_contact_us', 'contact_us',
+                  'display_privacy_policy', 'privacy_policy',
+                  'display_terms_of_service', 'terms_of_service']
 
 
 class ArticleAddForm(forms.ModelForm):
@@ -18,6 +32,26 @@ class ArticleAddForm(forms.ModelForm):
     class Meta:
         model = Article
         fields = ['title', 'thumbnail', 'category', 'tags', 'is_featured', 'summary', 'body']
+
+
+class GroupAddForm(forms.ModelForm):
+
+    class Meta:
+        model = Group
+        fields = ['name']
+
+class GroupDescriptionForm(forms.ModelForm):
+
+    class Meta:
+        model = GroupDescription
+        fields = ['description']
+
+
+class GroupForm(MultiModelForm):
+    form_classes = {
+        'group': GroupAddForm,
+        'description': GroupDescriptionForm,
+    }
 
 
 class AuthorAddForm(UserCreationForm):

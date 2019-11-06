@@ -1,24 +1,31 @@
 {% extends 'blog/main/about_base.html' %}
 {% load crispy_forms_tags %}
 
+{% if config.display_about_us %}
 
-{% block title %} About Us | {{ config.blog_name }} {% endblock %}
+    {% block title %} About Us | {{ config.blog_name }} {% endblock %}
 
 
-{% block content %}
+    {% block content %}
 
-    <div class="section-title mb-3">
-        ABOUT US
-        <hr>
-    </div>
-
-    <div class="jumbotron shadow">
-
-        <div class="body about-body">
-          <p>CMS Blog website has been developed for helping people understand and use technology in a better way.</p>
-          <p>Our task is to explore and observe the world, because there is always something somewhere incredible just waiting to be discovered. Through photos, videos and stories, we will give you a close-up look on latest technology and innovation.</p>
+        <div class="section-title mb-3">
+            ABOUT US
+            <hr>
         </div>
 
-    </div>
-    
-{% endblock %}
+        <div class="jumbotron shadow">
+
+            <div class="body about-body">
+                {{ config.about_us }}
+    {#          <p>CMS Blog website has been developed for helping people understand and use technology in a better way.</p>#}
+    {#          <p>Our task is to explore and observe the world, because there is always something somewhere incredible just waiting to be discovered. Through photos, videos and stories, we will give you a close-up look on latest technology and innovation.</p>#}
+            </div>
+
+        </div>
+
+    {% endblock %}
+
+{% else %}
+
+
+{% endif %}

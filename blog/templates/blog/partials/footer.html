@@ -5,15 +5,15 @@
 
         <div class="row">
             <div class="col-12">
-                <h2 class="logo">
+                <div class="logo">
                     <a href="{% url 'blog:homepage' %}">
-                        {% if config.blog_logo %}
-                            <img src="{{ config.blog_logo.url }}" alt="">
+                        {% if config.blog_name %}
+                            {{ config.blog_name }}
                         {% else %}
-                            <img src="/media/defaults/logo_default.png" alt="">
+                            {{ CMS }}
                         {% endif %}
                     </a>
-                </h2>
+                </div>
             </div>
         </div>
 
