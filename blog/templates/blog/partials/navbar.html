@@ -1,11 +1,11 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-info shadow">
     <div class="container">
 
-        <a class="navbar-brand" href="{% url 'blog:homepage' %}">
+        <a class="navbar-brand nav-logo" href="{% url 'blog:homepage' %}">
             {% if config.blog_name %}
                 {{ config.blog_name }}
             {% else %}
-                CMS
+                CMS Blog
             {% endif %}
         </a>
 
@@ -32,7 +32,7 @@
                         {% if menu.sub_count > 0 %}
 
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle {% if menu.name in request.path %} active {% endif %}"
+                                <a class="nav-link dropdown-toggle" {% if menu.type == "URL" %} target="_blank" {% endif %}
                                     href="
                                         {% if menu.type == "Category" %}
                                             {% url 'blog:articles-by-category' menu.category_link.slug %}
@@ -52,7 +52,7 @@
                                     {% for sub_menu in sub_menus %}
                                         {% if sub_menu.parent_menu == menu %}
 
-                                            <a class="dropdown-item"
+                                            <a class="dropdown-item" {% if menu.type == "URL" %} target="_blank" {% endif %}
                                                 href="
                                                    {% if sub_menu.type == "Category" %}
                                                        {% url 'blog:articles-by-category' sub_menu.category_link.slug %}
@@ -76,10 +76,7 @@
                         {% else %}
 
                             <li class="nav-item">
-                                <a class="nav-link
-                                    {% if '/category/cyber-security/' in request.path %}
-                                        active
-                                    {% endif %}"
+                                <a class="nav-link" {% if menu.type == "URL" %} target="_blank" {% endif %}
                                     href="
                                         {% if menu.type == "Category" %}
                                             {% url 'blog:articles-by-category' menu.category_link.slug %}
@@ -91,8 +88,7 @@
                                             #
                                         {% elif menu.type == "URL" %}
                                              {{ menu.external_url }}
-                                        {% endif %}
-                                    ">
+                                        {% endif %}">
                                     {{ menu.name }}<span class="sr-only"></span>
                                 </a>
                             </li>

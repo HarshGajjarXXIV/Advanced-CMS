@@ -8,27 +8,35 @@
             <div class="col-lg-10">
             <h3>Categories</h3>
         </div>
-        <div class="col-lg-2">
-            <a class="btn btn-primary btn-block" href="{% url 'author:category-create' %}">Add Category</a>
-        </div>
+        {% if request.user.is_superuser or perms.blog.add_category %}
+            <div class="col-lg-2">
+                <a class="btn btn-primary btn-block" href="{% url 'author:category-create' %}">Add Category</a>
+            </div>
+        {% endif %}
     </div>
 
      <table class="table table-sm mt-4">
          <thead>
             <tr>
-                <th>#</th>
                 <th>Title</th>
-                <th colspan="2">Actions</th>
+                <th>Description</th>
+                {% if request.user.is_superuser or perms.blog.change_category or perms.blog.delete_category %}
+                    <th colspan="2">Actions</th>
+                {% endif %}
             </tr>
          </thead>
 
          {% for category in categories %}
              <tbody>
                 <tr>
-                    <td>{{ category.id }}</td>
                     <td>{{ category.name }}</td>
-                    <td><a href="{% url 'author:category-update' category.id %}">Edit</a></td>
-                    <td><a href="{% url 'author:category-delete' category.id %}">Delete</a></td>
+                    <td>{{ category.description }}</td>
+                    {% if request.user.is_superuser or perms.blog.change_category %}
+                        <td><a href="{% url 'author:category-update' category.id %}">Edit</a></td>
+                    {% endif %}
+                    {% if request.user.is_superuser or perms.blog.delete_category %}
+                        <td><a href="{% url 'author:category-delete' category.id %}">Delete</a></td>
+                    {% endif %}
                 </tr>
              </tbody>
          {% endfor %}

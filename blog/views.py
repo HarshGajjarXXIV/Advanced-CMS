@@ -88,6 +88,8 @@ class ArticleDetail(FormMixin, DetailView):
         context = super(ArticleDetail, self).get_context_data(**kwargs)
 
         config = Configuration.objects.first()
+        menus = Menu.objects.annotate(sub_count=Count('submenu')).order_by('id')
+        sub_menus = SubMenu.objects.all()
         comments = Comment.objects.filter(
             article=temp_article,
             reply=None,
@@ -99,6 +101,8 @@ class ArticleDetail(FormMixin, DetailView):
 
         context.update({
             'config': config,
+            'menus': menus,
+            'sub_menus': sub_menus,
             'comments': comments,
             'form': form,
             'categories': categories,

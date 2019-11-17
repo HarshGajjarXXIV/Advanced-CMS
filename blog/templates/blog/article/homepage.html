@@ -13,8 +13,10 @@
             {% else %}
                 <center>NO RESULTS WERE FOUND!</center>
             {% endif %}
-        {% else %}
+        {% elif articles %}
             LATEST ARTICLES
+        {% else %}
+            <center>NO ARTICLES WERE FOUND!</center>
         {% endif %}
         <hr>
     </div>

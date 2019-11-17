@@ -11,13 +11,13 @@
       "instagram_link": "",
       "facebook_link": "",
       "display_about_us": 0,
-      "about_us": "",
+      "about_us": "Write about your blog here.",
       "display_contact_us": 0,
-      "contact_us": "",
+      "contact_us": "Write your contact information here.",
       "display_privacy_policy": 0,
-      "privacy_policy": "",
+      "privacy_policy": "Mention blog's privacy policy here.",
       "display_terms_of_service": 0,
-      "terms_of_service": ""
+      "terms_of_service": "Mention blog's terms of services here."
     }
   }
 ]

@@ -49,7 +49,8 @@ class ArticleFeatured(LoginRequiredMixin, UserPassesTestMixin, ListView):
     paginate_by = 10
 
     def test_func(self):
-        if self.request.user.is_superuser:
+        user = self.request.user
+        if user.is_superuser:
             return True
         else:
             return False
@@ -58,9 +59,16 @@ class ArticleFeatured(LoginRequiredMixin, UserPassesTestMixin, ListView):
         return Article.objects.filter(is_posted=True).filter(is_featured=True).order_by('-date_posted')
 
 
-class ArticleCreate(LoginRequiredMixin, CreateView):
+class ArticleCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     form_class = ArticleAddForm
     template_name = 'author/article/article_create.html'
+
+    def test_func(self):
+        user = self.request.user
+        if user.is_superuser or user.has_perm('blog.add_article'):
+            return True
+        else:
+            return False
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -86,7 +94,7 @@ class ArticleUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     def test_func(self):
         article = self.get_object()
         user = self.request.user
-        if user == article.author or user.is_superuser:
+        if user == article.author or user.is_superuser or user.has_perm('blog.change_article'):
             return True
         else:
             return False
@@ -110,7 +118,7 @@ class ArticleDetail(LoginRequiredMixin, FormMixin, DetailView):
     template_name = 'author/article/article_detail.html'
 
     def get_queryset(self):
-        article = Article.objects.filter(id=self.kwargs['pk']).filter(is_posted=True)
+        article = Article.objects.filter(id=self.kwargs['pk'])
         if article is None:
             raise Http404()
         else:
@@ -153,7 +161,7 @@ class ArticleDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
         article = self.get_object()
         user = self.request.user
-        if user == article.author or user.is_superuser:
+        if user == article.author or user.is_superuser or user.has_perm('blog.delete_article'):
             return True
         else:
             return False
@@ -172,7 +180,7 @@ class CommentDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
         comment = self.get_object()
         user = self.request.user
-        if user == comment.article.author or user.is_superuser:
+        if user == comment.author or user.is_superuser or user.has_perm('blog.delete_comment'):
             return True
         else:
             return False

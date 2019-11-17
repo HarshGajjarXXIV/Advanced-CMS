@@ -14,19 +14,7 @@
     <div class="jumbotron shadow">
 
         <div class="body" >
-
-            {{ config.privacy_policy }}
-
-{#            <p>These Terms of Service constitute the agreement between CMS Blog and you as a visitor of CMS Blog website.</p>#}
-{##}
-{#            <h3>Links To External Website</h3>#}
-{##}
-{#            <p>CMS Blog sometimes sahre the links to other website. We hold no responsibility when you visit the another third party URL. The links given are related to the article. More over there are also Advertisers URL.</p>#}
-{##}
-{#            <h3>Article Copyright</h3>#}
-{##}
-{#            <p>Every article is copyright to CMS Blog and you are not allowed to re-post re-publish any of the article from out website without permission. </p>#}
-
+            {{ config.privacy_policy | safe }}
         </div>
     </div>
 

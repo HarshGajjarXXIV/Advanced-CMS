@@ -14,7 +14,8 @@ class MessageList(LoginRequiredMixin, UserPassesTestMixin, ListView):
     template_name = 'author/message/message_list.html'
 
     def test_func(self):
-        if self.request.user.is_superuser:
+        user = self.request.user
+        if user.is_superuser or user.has_perm('blog.view_message'):
             return True
         else:
             return False
@@ -29,7 +30,8 @@ class MessageDetail(LoginRequiredMixin, UserPassesTestMixin, DetailView):
     template_name = 'author/message/message_detail.html'
 
     def test_func(self):
-        if self.request.user.is_superuser:
+        user = self.request.user
+        if user.is_superuser or user.has_perm('blog.view_message'):
             return True
         else:
             return False
@@ -48,7 +50,8 @@ class MessageDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     success_message = 'Message has been deleted successfully'
 
     def test_func(self):
-        if self.request.user.is_superuser:
+        user = self.request.user
+        if user.is_superuser or user.has_perm('blog.delete_message'):
             return True
         else:
             return False

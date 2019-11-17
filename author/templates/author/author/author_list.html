@@ -1,43 +1,68 @@
 {% extends 'author/main/base.html' %}
 
-{% block title %} Authors {% endblock %}
+{% block title %} Admins {% endblock %}
 
 {% block content %}
 
     <div class="row">
         <div class="col-lg-10">
-            <h3>Authors</h3>
+            <h3>Admins</h3>
         </div>
-        <div class="col-lg-2">
-            <a class="btn btn-primary btn-block" href="{% url 'author:author-create' %}">Add Author</a>
-        </div>
+        {% if request.user.is_superuser or perms.auth.add_user %}
+            <div class="col-lg-2">
+                <a class="btn btn-primary btn-block" href="{% url 'author:author-create' %}">Add Admin</a>
+            </div>
+        {% endif %}
     </div>
 
     <table class="table table-sm mt-4">
          <thead>
             <tr>
-                <th>#</th>
                 <th>Username</th>
                 <th>Name</th>
+                <th>Super Admin</th>
+                <th>Groups</th>
                 <th>Last Active</th>
                 <th>Status</th>
-                <th colspan="2">Actions</th>
+                {% if request.user.is_superuser or perms.auth.view_user or perms.auth.change_user %}
+                    <th colspan="2">Actions</th>
+                {% endif %}
             </tr>
          </thead>
 
          {% for author in authors %}
              <tbody>
                 <tr>
-                    <td>{{ author.id }}</td>
                     <td>{{ author.username }}</td>
                     <td>{{ author.first_name }} {{ author.last_name }}</td>
+                    <td>
+                        {% if author.is_superuser %}
+                            <i class="fa fa-check"></i>
+                        {% else %}
+                            <i class="fa fa-times"></i>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% for group in author.groups.all %}
+                                {{ group }}{% if not forloop.last %}<br> {% endif %}
+                            {% empty %}
+                                None
+                        {% endfor %}
+                    </td>
                     <td>{{ author.last_login }}</td>
                     {% if author.is_active %}
                         <td>Active</td>
                     {% else %}
                         <td>Deactivated</td>
                     {% endif %}
-                    <td><a href="{% url 'author:author-detail' author.id %}">View</a></td>
+                    {% if request.user.is_superuser or perms.auth.view_user %}
+                        <td><a href="{% url 'author:author-detail' author.id %}">View</a></td>
+                    {% endif %}
+                    {% if request.user.is_superuser %}
+                        <td><a href="{% url 'author:author-permissions-update' author.id %}">Update Permissions</a></td>
+                    {% elif perms.auth.change_user and not author.is_superuser %}
+                        <td><a href="{% url 'author:author-permissions-update' author.id %}">Update Permissions</a></td>
+                    {% endif %}
                 </tr>
              </tbody>
          {% endfor %}

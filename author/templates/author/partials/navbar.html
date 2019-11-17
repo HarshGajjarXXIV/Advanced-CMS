@@ -30,28 +30,56 @@
             </ul>
 
             <div class="navbar-nav">
-                <a class="nav-link" href="{% url 'author:article-create' %}">New Article</a>
+                {% if request.user.is_superuser or perms.blog.add_article %}
+                    <a class="nav-link" href="{% url 'author:article-create' %}">New Article</a>
+                {% endif %}
 
-                {% if request.user.is_superuser %}
+                {% if request.user.is_superuser or perms.blog.view_message or perms.blog.delete_message %}
                     <a class="nav-link" href="{% url 'author:message-list' %}">Messages</a>
                 {% endif %}
+
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        Manage
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                        {% if request.user.is_superuser or perms.blog.add_configuration or perms.blog.change_configuration or perms.blog.delete_configuration %}
+                            <a class="dropdown-item" href="{% url 'author:config-update' pk=1 %}">Configurations</a>
+                        {% endif %}
+
+                        {% if request.user.is_superuser or perms.blog.view_menu or perms.blog.add_menu or perms.blog.change_menu or perms.blog.delete_menu %}
+                            <a class="dropdown-item" href="{% url 'author:menu-list' %}">Menus</a>
+                        {% elif request.user.is_superuser or perms.blog.view_submenu or perms.blog.add_submenu or perms.blog.change_submenu or perms.blog.delete_submenu %}
+                            <a class="dropdown-item" href="{% url 'author:menu-list' %}">Menus</a>
+                        {% endif %}
+
+                        {% if request.user.is_superuser or perms.blog.view_category or perms.blog.add_category or perms.blog.change_category or perms.blog.delete_category %}
+                                <a class="dropdown-item" href="{% url 'author:category-list' %}">Categories</a>
+                        {% endif %}
+
+                        {% if request.user.is_superuser or perms.auth.view_group or perms.auth.add_group or perms.auth.change_group or perms.auth.delete_group %}
+                            <a class="dropdown-item" href="{% url 'author:group-list' %}">Admin Groups</a>
+                        {% endif %}
+
+                        {% if request.user.is_superuser or perms.auth.view_user or perms.auth.add_user or perms.auth.change_user or perms.auth.delete_user%}
+                            <a class="dropdown-item" href="{% url 'author:author-list' %}">Admins</a>
+                        {% endif %}
+                    </div>
+                </div>
 
                 <div class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         <img class="avatar" src="{{ user.profile.profile_pic.url }}" alt=""> {{ user.username }}
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
                         <a class="dropdown-item" href="{% url 'author:profile' %}">Profile</a>
-                        {% if request.user.is_superuser %}
-                            <a class="dropdown-item" href="{% url 'author:config-update' pk=1 %}">Manage Configurations</a>
-                            <a class="dropdown-item" href="{% url 'author:menu-list' %}">Manage Menus</a>
-                            <a class="dropdown-item" href="{% url 'author:category-list' %}">Manage Categories</a>
-                            <a class="dropdown-item" href="{% url 'author:group-list' %}">Manage Admin Groups</a>
-                            <a class="dropdown-item" href="{% url 'author:author-list' %}">Manage Authors</a>
-                        {% endif %}
-                        <a class="dropdown-item" href="{% url 'author:logout' %}">Logout</a>
+                        <a class="dropdown-item" href="{% url 'password_reset' %}">Reset Password</a>
+                        <a class="dropdown-item" href="{% url 'author:logout' %}"><i class="fa fa-sign-out-alt"></i> Logout</a>
                     </div>
                 </div>
+
             </div>
 
         </div>

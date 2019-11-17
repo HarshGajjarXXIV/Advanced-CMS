@@ -16,9 +16,7 @@
         <div class="jumbotron shadow">
 
             <div class="body about-body">
-                {{ config.about_us }}
-    {#          <p>CMS Blog website has been developed for helping people understand and use technology in a better way.</p>#}
-    {#          <p>Our task is to explore and observe the world, because there is always something somewhere incredible just waiting to be discovered. Through photos, videos and stories, we will give you a close-up look on latest technology and innovation.</p>#}
+                {{ config.about_us | safe }}
             </div>
 
         </div>

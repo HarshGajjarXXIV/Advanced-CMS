@@ -15,8 +15,7 @@
     <div class="jumbotron shadow">
 
         <div class="body about-body">
-            {{ config.contact_us }}
-{#            <p>If you have any questions or suggestions, we are always ready to help you. You can contact us at <b>abc@xyz.com</b> or you can directly <a class="page-scroll" href="#message">leave a message via form.</a></p>#}
+            {{ config.contact_us | safe }}
         </div>
 
     </div>

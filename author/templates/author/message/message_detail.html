@@ -1,6 +1,6 @@
 {% extends 'author/main/base.html' %}
 
-{% block title %} {{ user_message.title }} | Message {% endblock %}
+{% block title %} {{ user_message.subject }} | Message {% endblock %}
 
 {% block content %}
 
@@ -21,5 +21,7 @@
             <p>{{ user_message.message }}</p>
         </div>
     </div>
-    <a class="btn btn-danger" href="{% url 'author:message-delete' user_message.id %}">Delete</a>
+    {% if request.user.is_superuser or perms.blog.delete_message %}
+        <a class="btn btn-danger" href="{% url 'author:message-delete' user_message.id %}">Delete</a>
+    {% endif %}
 {% endblock %}

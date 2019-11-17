@@ -1,16 +1,16 @@
 {% load static %}
 
-<footer class="footer mt-4">
+<footer class="footer" {% if not articles %} style="margin-top:400px" {% endif %}>
     <div class="container">
 
         <div class="row">
             <div class="col-12">
-                <div class="logo">
+                <div class="footer-logo">
                     <a href="{% url 'blog:homepage' %}">
                         {% if config.blog_name %}
                             {{ config.blog_name }}
                         {% else %}
-                            {{ CMS }}
+                            CMS Blog
                         {% endif %}
                     </a>
                 </div>

@@ -1,13 +1,11 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.models import User, Group
+from django.shortcuts import redirect
+from django.contrib.auth.models import Group
 from django.urls import reverse_lazy
-from author.forms import GroupForm, GroupAddForm, GroupDescription
+from author.forms import GroupForm
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (
     ListView,
-    DetailView,
     CreateView,
     UpdateView,
     DeleteView
@@ -20,7 +18,12 @@ class GroupList(LoginRequiredMixin, UserPassesTestMixin, ListView):
     template_name = 'author/admin_group/group_list.html'
 
     def test_func(self):
-        if self.request.user.is_superuser:
+        user = self.request.user
+        if user.is_superuser \
+                or user.has_perm('auth.view_group') \
+                or user.has_perm('auth.add_group') \
+                or user.has_perm('auth.change_group') \
+                or user.has_perm('auth.delete_group'):
             return True
         else:
             return False
@@ -35,7 +38,8 @@ class GroupCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     form_class = GroupForm
 
     def test_func(self):
-        if self.request.user.is_superuser:
+        user = self.request.user
+        if user.is_superuser or user.has_perm('auth.add_group'):
             return True
         else:
             return False
@@ -46,7 +50,7 @@ class GroupCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
         description = form['description'].save(commit=False)
         description.group = group
         description.save()
-        messages.success(self.request, 'New Group added successfully')
+        messages.success(self.request, 'New admin group added successfully')
         return redirect('author:group-list')
 
 class GroupUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
@@ -55,7 +59,8 @@ class GroupUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     form_class = GroupForm
 
     def test_func(self):
-        if self.request.user.is_superuser:
+        user = self.request.user
+        if user.is_superuser or user.has_perm('auth.change_group'):
             return True
         else:
             return False
@@ -70,7 +75,7 @@ class GroupUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     def form_valid(self, form):
         form.save()
-        messages.success(self.request, 'group Updated Successfully')
+        messages.success(self.request, 'Admin group updated successfully')
         return redirect('author:group-list')
 
 
@@ -81,7 +86,8 @@ class GroupDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     success_message = 'Group has been deleted successfully'
 
     def test_func(self):
-        if self.request.user.is_superuser:
+        user = self.request.user
+        if user.is_superuser or user.has_perm('auth.delete_group'):
             return True
         else:
             return False

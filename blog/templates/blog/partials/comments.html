@@ -32,12 +32,12 @@
                     {% if comment.is_author %}
                         <img src="{{ comment.author.profile.profile_pic.url }}" class="user-img shadow" alt="">
                     {% else %}
-                        <img src="/media/profile_pics/default.jpg" class="user-img shadow" alt="">
+                        <img src="/media/defaults/profile_pic_default.jpg" class="user-img shadow" alt="">
                     {% endif %}
                     <div class="comment-info">
                         {% if comment.is_author %}
                             <a href="{% url 'blog:articles-by-author' article.author %}">
-                                {{ article.author.first_name }} {{ article.author.last_name }}
+                                {{ comment.author.first_name }} {{ comment.author.last_name }}
                             </a>
                         {% else %}
                             <h5>{{ comment.user_name }}</h5>
@@ -75,12 +75,12 @@
                             {% if reply.is_author %}
                                 <img src="{{ reply.author.profile.profile_pic.url }}" class="user-img shadow" alt="">
                             {% else %}
-                                <img src="/media/profile_pics/default.jpg" class="user-img shadow" alt="">
+                                <img src="/media/defaults/profile_pic_default.jpg" class="user-img shadow" alt="">
                             {% endif %}
                             <div class="comment-info">
                                 {% if reply.is_author %}
                                     <a href="{% url 'blog:articles-by-author' article.author %}">
-                                        {{ article.author.first_name }} {{ article.author.last_name }}
+                                        {{ reply.author.first_name }} {{ reply.author.last_name }}
                                     </a>
                                 {% else %}
                                     <h5>{{ reply.user_name }}</h5>

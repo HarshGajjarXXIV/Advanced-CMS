@@ -1,28 +1,32 @@
-from django.http import Http404
-from django.shortcuts import get_object_or_404, redirect
-from blog.models import Comment
-from blog.models import Article, Menu, SubMenu
+from blog.models import Menu, SubMenu
 from django.contrib import messages
 from django.urls import reverse_lazy
 from author.forms import MenuAddForm, SubMenuAddForm
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.views.generic.edit import FormMixin
 from django.views.generic import (
     ListView,
-    DetailView,
     CreateView,
     UpdateView,
     DeleteView
 )
 
 
-class MenuList(ListView):
+class MenuList(UserPassesTestMixin, LoginRequiredMixin, ListView):
     model = Menu
     context_object_name = 'menus'
-    template_name = 'author/config/menu_list.html'
+    template_name = 'author/menu/menu_list.html'
 
     def test_func(self):
-        if self.request.user.is_superuser:
+        user = self.request.user
+        if user.is_superuser \
+                or user.has_perm('blog.view_menu') \
+                or user.has_perm('blog.add_menu') \
+                or user.has_perm('blog.change_menu') \
+                or user.has_perm('blog.delete_menu') \
+                or user.has_perm('blog.view_submenu') \
+                or user.has_perm('blog.add_submenu') \
+                or user.has_perm('blog.change_submenu') \
+                or user.has_perm('blog.delete_submenu'):
             return True
         else:
             return False
@@ -40,13 +44,14 @@ class MenuList(ListView):
         return context
 
 
-class MenuCreate(CreateView):
+class MenuCreate(UserPassesTestMixin, LoginRequiredMixin, CreateView):
     form_class = MenuAddForm
-    template_name = 'author/config/menu_create.html'
+    template_name = 'author/menu/menu_create.html'
     success_url = reverse_lazy('author:menu-list')
 
     def test_func(self):
-        if self.request.user.is_superuser:
+        user = self.request.user
+        if user.is_superuser or user.has_perm('blog.add_menu'):
             return True
         else:
             return False
@@ -93,14 +98,15 @@ class MenuCreate(CreateView):
         return super().form_valid(form)
 
 
-class MenuUpdate(UpdateView):
+class MenuUpdate(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
     model = Menu
     form_class = MenuAddForm
     success_url = reverse_lazy('author:menu-list')
-    template_name = 'author/config/menu_create.html'
+    template_name = 'author/menu/menu_create.html'
 
     def test_func(self):
-        if self.request.user.is_superuser:
+        user = self.request.user
+        if user.is_superuser or user.has_perm('blog.change_menu'):
             return True
         else:
             return False
@@ -147,14 +153,15 @@ class MenuUpdate(UpdateView):
         return super().form_valid(form)
 
 
-class MenuDelete(DeleteView):
+class MenuDelete(UserPassesTestMixin, LoginRequiredMixin, DeleteView):
     model = Menu
-    template_name = 'author/config/menu_confirm_delete.html'
+    template_name = 'author/menu/menu_confirm_delete.html'
     success_url = reverse_lazy('author:menu-list')
     success_message = 'Menu has been deleted successfully'
 
     def test_func(self):
-        if self.request.user.is_superuser:
+        user = self.request.user
+        if user.is_superuser or user.has_perm('blog.delete_menu'):
             return True
         else:
             return False
@@ -164,13 +171,14 @@ class MenuDelete(DeleteView):
         return super(MenuDelete, self).delete(self, *args, **kwargs)
 
 
-class SubMenuCreate(CreateView):
+class SubMenuCreate(UserPassesTestMixin, LoginRequiredMixin, CreateView):
     form_class = SubMenuAddForm
     success_url = reverse_lazy('author:menu-list')
-    template_name = 'author/config/menu_create.html'
+    template_name = 'author/menu/menu_create.html'
 
     def test_func(self):
-        if self.request.user.is_superuser:
+        user = self.request.user
+        if user.is_superuser or user.has_perm('blog.add_submenu'):
             return True
         else:
             return False
@@ -217,14 +225,15 @@ class SubMenuCreate(CreateView):
         return super().form_valid(form)
 
 
-class SubMenuUpdate(UpdateView):
+class SubMenuUpdate(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
     model = SubMenu
     form_class = SubMenuAddForm
     success_url = reverse_lazy('author:menu-list')
-    template_name = 'author/config/menu_create.html'
+    template_name = 'author/menu/menu_create.html'
 
     def test_func(self):
-        if self.request.user.is_superuser:
+        user = self.request.user
+        if user.is_superuser or user.has_perm('blog.change_submenu'):
             return True
         else:
             return False
@@ -271,14 +280,15 @@ class SubMenuUpdate(UpdateView):
         return super().form_valid(form)
 
 
-class SubMenuDelete(DeleteView):
+class SubMenuDelete(UserPassesTestMixin, LoginRequiredMixin, DeleteView):
     model = SubMenu
-    template_name = 'author/config/menu_confirm_delete.html'
+    template_name = 'author/menu/menu_confirm_delete.html'
     success_url = reverse_lazy('author:menu-list')
     success_message = 'Sub-Menu has been deleted successfully'
 
     def test_func(self):
-        if self.request.user.is_superuser:
+        user = self.request.user
+        if user.is_superuser or user.has_perm('blog.delete_submenu'):
             return True
         else:
             return False

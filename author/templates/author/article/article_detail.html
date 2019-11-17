@@ -47,15 +47,22 @@
                         {% endfor %}
                     </div>
 
-                    <div class="mt-2">
-                        <div class="section-title-author">Posted At</div>
-                        {{ article.date_posted | date:"F d, Y" }}
-                    </div>
+                    {% if article.is_posted %}
+                        <div class="mt-2">
+                            <div class="section-title-author">Posted At</div>
+                            {{ article.date_posted | date:"F d, Y" }}
+                        </div>
 
-                    <div class="mt-2">
-                        <div class="section-title-author">Last Updated</div>
-                        {{ article.date_updated | date:"F d, Y" }}
-                    </div>
+                        <div class="mt-2">
+                            <div class="section-title-author">Last Updated</div>
+                            {{ article.date_updated | date:"F d, Y" }}
+                        </div>
+                    {% else %}
+                        <div class="mt-2">
+                        <div class="section-title-author">Status</div>
+                        Unpublished
+                        </div>
+                    {% endif %}
 
                     <div class="mt-2">
                         <div class="section-title-author">Author</div>

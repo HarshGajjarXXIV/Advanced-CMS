@@ -1,7 +1,7 @@
 from django import forms
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User, Group, Permission
 from .models import Profile, GroupDescription
-from blog.models import Article, Comment, Menu, SubMenu, Category, Configuration
+from blog.models import Article, Comment, Menu, SubMenu, Configuration
 from django.contrib.auth.forms import UserCreationForm
 from betterforms.multiform import MultiModelForm
 
@@ -36,11 +36,35 @@ class ArticleAddForm(forms.ModelForm):
 
 class GroupAddForm(forms.ModelForm):
 
+    name = forms.CharField(label='Admin Group Name',
+                           widget=forms.TextInput(
+                               attrs={'placeholder': 'Admin group name',
+                                      'class': 'shadow',
+                                      }
+                               ))
+
+    permissions = forms.ModelMultipleChoiceField(label='Permissions (Hold \'Ctrl\' to select multiple permissions)',
+                                                 queryset=Permission.objects,
+                                                 widget=forms.SelectMultiple(
+                                                     attrs={'class': 'shadow',
+                                                            'size': '10'
+                                                            }
+                                                ))
+
     class Meta:
         model = Group
-        fields = ['name']
+        fields = ['name', 'permissions']
+
 
 class GroupDescriptionForm(forms.ModelForm):
+
+    description = forms.CharField(label='Description',
+                                  widget=forms.Textarea(
+                                      attrs={'placeholder': 'Add admin group description',
+                                             'class': 'shadow',
+                                             'rows': '5'
+                                             }
+                                  ))
 
     class Meta:
         model = GroupDescription
@@ -48,6 +72,7 @@ class GroupDescriptionForm(forms.ModelForm):
 
 
 class GroupForm(MultiModelForm):
+
     form_classes = {
         'group': GroupAddForm,
         'description': GroupDescriptionForm,
@@ -101,6 +126,13 @@ class AuthorAddForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'email', 'first_name', 'last_name', 'password1', 'password2']
+
+
+class AuthorAddGroupForm(forms.ModelForm):
+
+    class Meta:
+        model = User
+        fields = ['groups', 'is_superuser', 'is_staff']
 
 
 class AuthorUpdateForm(forms.ModelForm):
@@ -178,6 +210,14 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['profile_pic', 'bio', 'twitter', 'instagram', 'facebook']
+
+
+class AuthorProfileUpdateForm(MultiModelForm):
+
+    form_classes = {
+        'author': AuthorUpdateForm,
+        'profile': ProfileUpdateForm,
+    }
 
 
 class MenuAddForm(forms.ModelForm):

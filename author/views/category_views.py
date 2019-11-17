@@ -16,7 +16,12 @@ class CategoryList(LoginRequiredMixin, UserPassesTestMixin, ListView):
     template_name = 'author/category/category_list.html'
 
     def test_func(self):
-        if self.request.user.is_superuser:
+        user = self.request.user
+        if user.is_superuser \
+                or user.has_perm('blog.view_category') \
+                or user.has_perm('blog.add_category') \
+                or user.has_perm('blog.change_category') \
+                or user.has_perm('blog.delete_category'):
             return True
         else:
             return False
@@ -31,7 +36,8 @@ class CategoryCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     template_name = 'author/category/category_create.html'
 
     def test_func(self):
-        if self.request.user.is_superuser:
+        user = self.request.user
+        if user.is_superuser or user.has_perm('blog.add_category'):
             return True
         else:
             return False
@@ -48,7 +54,8 @@ class CategoryUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     template_name = 'author/category/category_create.html'
 
     def test_func(self):
-        if self.request.user.is_superuser:
+        user = self.request.user
+        if user.is_superuser or user.has_perm('blog.change_category'):
             return True
         else:
             return False
@@ -66,7 +73,8 @@ class CategoryDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     success_message = 'Category has been deleted successfully'
 
     def test_func(self):
-        if self.request.user.is_superuser:
+        user = self.request.user
+        if user.is_superuser or user.has_perm('blog.delete_category'):
             return True
         else:
             return False

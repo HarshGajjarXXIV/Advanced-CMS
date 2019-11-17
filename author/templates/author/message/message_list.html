@@ -9,18 +9,18 @@
     <table class="table table-sm mt-4">
          <thead>
             <tr>
-                <th>#</th>
                 <th>Subject</th>
                 <th>Email</th>
                 <th>Read</th>
-                <th colspan="2">Actions</th>
+                {% if request.user.is_superuser or perms.blog.view_message or perms.blog.delete_message %}
+                    <th colspan="2">Actions</th>
+                {% endif %}
             </tr>
          </thead>
 
          {% for user_message in user_messages %}
              <tbody>
                 <tr>
-                    <td>{{ user_message.id }}</td>
                     <td>{{ user_message.subject }}</td>
                     <td>{{ user_message.email }}</td>
                     <td>
@@ -30,8 +30,12 @@
                             <i class="fa fa-envelope"></i>
                         {% endif %}
                     </td>
-                    <td><a href="{% url 'author:message-detail' user_message.id %}">View</a></td>
-                    <td><a href="{% url 'author:message-delete' user_message.id %}">Delete</a></td>
+                    {% if request.user.is_superuser or perms.blog.view_message %}
+                        <td><a href="{% url 'author:message-detail' user_message.id %}">View</a></td>
+                    {% endif %}
+                    {% if request.user.is_superuser or perms.blog.delete_message %}
+                        <td><a href="{% url 'author:message-delete' user_message.id %}">Delete</a></td>
+                    {% endif %}
                 </tr>
              </tbody>
          {% endfor %}

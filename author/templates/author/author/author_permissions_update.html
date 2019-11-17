@@ -1,27 +1,26 @@
 {% extends 'author/main/base.html' %}
 {% load crispy_forms_tags %}
 
-{% block title %} Edit Profile {% endblock %}
+{% block title %} {{ author.username }} | Admin Permissions {% endblock %}
 
 {% block content %}
     <div class="row justify-content-md-center">
         <div class="col-md-10">
-            <h4>Edit Your Profile</h4>
+            <h4>Update Permissions for {{ author.username }}</h4>
             <hr>
             <div class="jumbotron shadow">
                 <div class="container">
-
-                    <form method="POST" enctype="multipart/form-data">
+                    <form method="POST">
                         {% csrf_token %}
                         <fieldset class="form-group">
                             {{ form | crispy }}
                         </fieldset>
                         <div class="form-group">
-                            <button class="btn btn-success btn-block shadow" type="submit">Update Profile</button>
+                            <button class="btn btn-primary" type="submit">Update Permissions</button>
                         </div>
                     </form>
-
                 </div>
+
             </div>
         </div>
     </div>

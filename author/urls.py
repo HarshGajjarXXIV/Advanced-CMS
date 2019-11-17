@@ -38,11 +38,11 @@ urlpatterns = [
 
     path('authors/', views.AuthorList.as_view(), name='author-list'),
     path('authors/add/', views.AuthorCreate.as_view(), name='author-create'),
+    path('authors/<int:pk>/groups/', views.PermissionsUpdate.as_view(), name='author-permissions-update'),
     path('profile/', views.Profile.as_view(), name='profile'),
     path('authors/<int:pk>/', views.AuthorDetail.as_view(), name='author-detail'),
     path('authors/<int:pk>/deactivate/', views.AuthorDeactivate.as_view(), name='author-deactivate'),
-    path('profile/update/', views.edit_profile, name='profile-update'),
-    # path('profile/edit/', views.ProfileUpdate.as_view(), name='profile-update'),
+    path('profile/<int:pk>/edit/', views.ProfileUpdate.as_view(), name='profile-update'),
 
     path('groups/', views.GroupList.as_view(), name='group-list'),
     path('groups/add/', views.GroupCreate.as_view(), name='group-create'),

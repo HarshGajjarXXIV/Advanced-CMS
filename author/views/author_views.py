@@ -1,16 +1,14 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.urls import reverse_lazy
-from author.forms import AuthorAddForm, AuthorUpdateForm, ProfileUpdateForm
+from author.forms import AuthorAddForm, AuthorAddGroupForm, AuthorProfileUpdateForm
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (
     ListView,
     DetailView,
     CreateView,
     UpdateView,
-    DeleteView
 )
 
 from blog.models import Article, Comment
@@ -22,7 +20,12 @@ class AuthorList(LoginRequiredMixin, UserPassesTestMixin, ListView):
     template_name = 'author/author/author_list.html'
 
     def test_func(self):
-        if self.request.user.is_superuser:
+        user = self.request.user
+        if user.is_superuser \
+                or user.has_perm('auth.view_user') \
+                or user.has_perm('auth.add_user') \
+                or user.has_perm('auth.change_user') \
+                or user.has_perm('auth.delete_user'):
             return True
         else:
             return False
@@ -37,7 +40,8 @@ class AuthorCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     form_class = AuthorAddForm
 
     def test_func(self):
-        if self.request.user.is_superuser:
+        user = self.request.user
+        if user.is_superuser or user.has_perm('auth.add_user'):
             return True
         else:
             return False
@@ -48,13 +52,63 @@ class AuthorCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
         return redirect('author:author-list')
 
 
+class PermissionsUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = User
+    context_object_name = 'author'
+    template_name = 'author/author/author_permissions_update.html'
+    form_class = AuthorAddGroupForm
+
+    def test_func(self):
+        user = self.get_object()
+        logged_user = self.request.user
+        if logged_user.is_superuser:
+            return True
+        elif logged_user.has_perm('auth.change_user') and not user.is_superuser:
+            return True
+        else:
+            return False
+
+    def form_valid(self, form):
+        form.save()
+        messages.success(self.request, 'Admin\'s permissions has been updated!')
+        return redirect('author:author-list')
+
+
+class ProfileUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = User
+    template_name = 'author/author/profile_update.html'
+    form_class = AuthorProfileUpdateForm
+
+    def test_func(self):
+        user = self.get_object()
+        logged_user = self.request.user
+        if user == logged_user:
+            return True
+        else:
+            return False
+
+    def get_form_kwargs(self):
+        kwargs = super(ProfileUpdate, self).get_form_kwargs()
+        kwargs.update(instance={
+            'author': self.object,
+            'profile': self.object.profile,
+        })
+        return kwargs
+
+    def form_valid(self, form):
+        form.save()
+        messages.success(self.request, 'Your profile has been updated!')
+        return redirect('author:profile')
+
+
 class AuthorDetail(LoginRequiredMixin, UserPassesTestMixin, DetailView):
     model = User
     context_object_name = 'author'
     template_name = 'author/author/profile.html'
 
     def test_func(self):
-        if self.request.user.is_superuser:
+        user = self.request.user
+        if user.is_superuser or user.has_perm('auth.view_user'):
             return True
         else:
             return False
@@ -105,29 +159,6 @@ class Profile(LoginRequiredMixin, UserPassesTestMixin, DetailView):
         return context
 
 
-@login_required
-def edit_profile(request):
-    if request.method == 'POST':
-        author_form = AuthorUpdateForm(request.POST, instance=request.user)
-        profile_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
-
-        if author_form.is_valid() and profile_form.is_valid():
-            author_form.save()
-            profile_form.save()
-            messages.success(request, f'Your profile has been updated!')
-            return redirect('author:profile')
-
-    else:
-        author_form = AuthorUpdateForm(instance=request.user)
-        profile_form = ProfileUpdateForm(instance=request.user.profile)
-
-    context = {
-        'author_form': author_form,
-        'profile_form': profile_form
-    }
-    return render(request, 'author/author/profile_update.html', context)
-
-
 class AuthorDeactivate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = User
 
@@ -135,6 +166,8 @@ class AuthorDeactivate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         user_to_deactivate = self.get_object()
         user = self.request.user
         if user.is_superuser or user == user_to_deactivate:
+            return True
+        elif user.has_perm('auth.delete_user') and not user_to_deactivate.is_superuser:
             return True
         else:
             return False
@@ -151,27 +184,3 @@ class AuthorDeactivate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
             return redirect('author:login')
         else:
             return redirect('author:author-list')
-
-
-# class ProfileUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-#     model = Profile
-#     template_name = 'author/author/profile_update.html'
-#     form_class = {
-#         AuthorUpdateForm,
-#         ProfileUpdateForm
-#     }
-#
-#     success_url = reverse_lazy('author:profile')
-#
-#     def get_object(self, queryset=None):
-#         return self.request.user
-#
-#     def test_func(self):
-#         if self.request.user.is_superuser:
-#             return True
-#         else:
-#             return False
-#
-#     def form_valid(self, form):
-#         form.save()
-#         messages.success(self.request, 'Profile has been updated successfully')

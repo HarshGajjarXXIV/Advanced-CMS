@@ -21,9 +21,11 @@
             <div class="col-lg-10">
                 <h3>Articles By You ({{ paginator.count }})</h3>
             </div>
-            <div class="col-lg-2">
-                <a class="btn btn-primary btn-block" href="{% url 'author:article-create' %}">New Article</a>
-            </div>
+            {% if request.user.is_superuser or perms.blog.add_article %}
+                <div class="col-lg-2">
+                    <a class="btn btn-primary btn-block" href="{% url 'author:article-create' %}">New Article</a>
+                </div>
+            {% endif %}
         </div>
     {% elif '/article/draft/' in request.path %}
         <h3>Drafts ({{ paginator.count }})</h3>
@@ -36,9 +38,6 @@
     <table class="table table-sm mt-4">
         <thead>
             <tr>
-                {% if request.user.is_superuser %}
-                    <th>#</th>
-                {% endif %}
                 <th>Title</th>
                 <th>Categories</th>
                 <th>Posted at</th>
@@ -49,7 +48,7 @@
                     <th>Featured</th>
                     <th>Views</th>
                 {% endif %}
-                {% if '/article/all/' not in request.path or request.user.is_superuser %}
+                {% if request.user.is_superuser or perms.blog.change_article or perms.blog.delete_article %}
                     <th colspan="2">Actions</th>
                 {% endif %}
             </tr>
@@ -59,10 +58,10 @@
             {% for article in articles %}
 
                 <tr>
-                    {% if request.user.is_superuser %}
-                        <td>{{ article.id }}</td>
-                    {% endif %}
-                    <td><a href="{% url 'author:article-detail' article.id %}">{{ article.title }}</a></td>
+                    <td><a href="{% url 'author:article-detail' article.id %}">
+                        {{ article.title | truncatechars:50 }}
+                        </a>
+                    </td>
                     <td>
                         {% for category in article.category.all %}
                             {{ category }}{% if not forloop.last %}, {% endif %}
@@ -74,21 +73,21 @@
                         <td>{{ article.author.first_name }} {{ article.author.last_name }}</td>
                     {% endif %}
 
-                    {% if request.user.is_superuser %}
-                            <td>
-                                {% if article.is_featured %}
-                                    <i class="fa fa-check"></i>
-                                {% else %}
-                                    <i class="fa fa-times"></i>
-                                {% endif %}
-                            </td>
-                            <td>{{ article.views }}</td>
-                    {% endif %}
+                    <td>
+                        {% if article.is_featured %}
+                            <i class="fa fa-check"></i>
+                        {% else %}
+                            <i class="fa fa-times"></i>
+                        {% endif %}
+                    </td>
+                    <td>{{ article.views }}</td>
 
-                    {% if '/article/all/' not in request.path or request.user.is_superuser %}
+                    {% if request.user.is_superuser or perms.blog.change_article  %}
                         <td>
                             <a href="{% url 'author:article-update' article.id %}">Edit</a><br>
                         </td>
+                    {% endif %}
+                    {% if request.user.is_superuser or perms.blog.delete_article  %}
                         <td>
                             <a href="{% url 'author:article-delete' article.id %}">Delete</a>
                         </td>

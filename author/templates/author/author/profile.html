@@ -96,18 +96,27 @@
                     </div>
 
                     <div class="mt-2">
-                        <div class="section-title-author">Role</div>
+                        <div class="section-title-author">Admin Group(s)</div>
+                        {% for group in author.groups.all %}
+                            {{ group }}{% if not forloop.last %}<br> {% endif %}
+                        {% empty %}
+                            No Admin Group Assigned
+                        {% endfor %}
+                    </div>
+
+                    <div class="mt-2">
+                        <div class="section-title-author">Super Admin</div>
                         {% if author.is_superuser %}
-                            Administrator
+                            True
                         {% else %}
-                            Author
+                            False
                         {% endif %}
                     </div>
 
                     {% if '/authors/' in request.path %}
 
                         <div class="mt-2">
-                            <div class="section-title-author">Admin Access</div>
+                            <div class="section-title-author">Django-Admin (Staff) Access</div>
                             {% if author.is_staff %}
                                 True
                             {% else %}
@@ -123,23 +132,39 @@
 
                     <div class="row mt-4">
                         {% if '/profile/' in request.path %}
-                            <div class="col-6">
-                                <a href="{% url 'author:profile-update' %}" class="btn btn-primary btn-block shadow">Edit</a>
+                            <div class="col-12">
+                                <a href="{% url 'author:profile-update' author.id %}" class="btn btn-primary btn-block shadow">Edit</a>
                             </div>
-                        {% else %}
-                            <div class="col-6">
-                                <a href="#" class="btn btn-primary btn-block shadow">Change Role</a>
+                        {% elif request.user.is_superuser %}
+                            <div class="col-12">
+                                <a href="{% url 'author:author-permissions-update' author.id %}" class="btn btn-primary btn-block shadow">Update Permissions</a>
+                            </div>
+                        {% elif perms.auth.change_user and not author.is_superuser %}
+                            <div class="col-12">
+                                <a href="{% url 'author:author-permissions-update' author.id %}" class="btn btn-primary btn-block shadow">Update Permissions</a>
                             </div>
                         {% endif %}
 
-                        {% if author.is_active %}
-                            <div class="col-6">
-                                <button type="button" class="btn btn-danger btn-block shadow" data-toggle="modal" data-target="#myModal">Deactivate</button>
-                            </div>
-                        {% else %}
-                            <div class="col-6">
-                                <button type="button" class="btn btn-success btn-block shadow" data-toggle="modal" data-target="#myModal">Reactivate</button>
-                            </div>
+                        {% if request.user.is_superuser %}
+                            {% if author.is_active %}
+                                <div class="col-12 mt-2">
+                                    <button type="button" class="btn btn-danger btn-block shadow" data-toggle="modal" data-target="#myModal">Deactivate</button>
+                                </div>
+                            {% else %}
+                                <div class="col-12 mt-2">
+                                    <button type="button" class="btn btn-success btn-block shadow" data-toggle="modal" data-target="#myModal">Reactivate</button>
+                                </div>
+                            {% endif %}
+                        {% elif perms.auth.delete_user and not author.is_superuser %}
+                            {% if author.is_active %}
+                                <div class="col-12 mt-2">
+                                    <button type="button" class="btn btn-danger btn-block shadow" data-toggle="modal" data-target="#myModal">Deactivate</button>
+                                </div>
+                            {% else %}
+                                <div class="col-12 mt-2">
+                                    <button type="button" class="btn btn-success btn-block shadow" data-toggle="modal" data-target="#myModal">Reactivate</button>
+                                </div>
+                            {% endif %}
                         {% endif %}
                     </div>
                 </div>

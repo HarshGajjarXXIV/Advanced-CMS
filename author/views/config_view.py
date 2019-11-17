@@ -14,7 +14,11 @@ class ConfigUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     template_name = 'author/config/blog_configurations.html'
 
     def test_func(self):
-        if self.request.user.is_superuser:
+        user = self.request.user
+        if user.is_superuser \
+                or user.has_perm('blog.add_configuration') \
+                or user.has_perm('blog.change_configuration') \
+                or user.has_perm('blog.delete_configuration'):
             return True
         else:
             return False

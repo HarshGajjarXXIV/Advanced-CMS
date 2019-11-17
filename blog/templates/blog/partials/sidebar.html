@@ -56,7 +56,7 @@
         </div>
 
         <div class="sidebar-content">
-            <ul>
+            <ul style="list-style-type:circle">
                 {% for article in featured_articles %}
                     <li class="custom-link sidebar-link">
                         <a href="{% url 'blog:article-detail' article.slug %}">
