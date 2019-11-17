@@ -2,51 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9e138484-6682-4b9f-86cb-820c3b0acabc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/author/templates/author/menu/menu_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/35dbeee9-e650-463b-9d91-b6ebe8ca175f.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/35dbeee9-e650-463b-9d91-b6ebe8ca175f.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/5b67201c-5140-492c-8b36-559f5ad4297b.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/5b67201c-5140-492c-8b36-559f5ad4297b.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/author/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/author/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/author/templates/author/admin_group/group_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/author/templates/author/admin_group/group_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/author/templates/author/article/article_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/author/templates/author/article/article_detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/author/templates/author/article/article_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/author/templates/author/article/article_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/author/templates/author/auth/password_reset.html" beforeDir="false" afterPath="$PROJECT_DIR$/author/templates/author/auth/password_reset.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/author/templates/author/auth/password_reset_complete.html" beforeDir="false" afterPath="$PROJECT_DIR$/author/templates/author/auth/password_reset_complete.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/author/templates/author/auth/password_reset_confirm.html" beforeDir="false" afterPath="$PROJECT_DIR$/author/templates/author/auth/password_reset_confirm.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/author/templates/author/auth/password_reset_done.html" beforeDir="false" afterPath="$PROJECT_DIR$/author/templates/author/auth/password_reset_done.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/author/templates/author/author/author_create.html" beforeDir="false" afterPath="$PROJECT_DIR$/author/templates/author/author/author_create.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/author/templates/author/author/author_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/author/templates/author/author/author_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/author/templates/author/author/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/author/templates/author/author/profile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/author/templates/author/author/profile_update.html" beforeDir="false" afterPath="$PROJECT_DIR$/author/templates/author/author/profile_update.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/author/templates/author/category/category_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/author/templates/author/category/category_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/author/templates/author/config/menu_confirm_delete.html" beforeDir="false" afterPath="$PROJECT_DIR$/author/templates/author/menu/menu_confirm_delete.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/author/templates/author/config/menu_create.html" beforeDir="false" afterPath="$PROJECT_DIR$/author/templates/author/menu/menu_create.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/author/templates/author/config/menu_list.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/author/templates/author/message/message_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/author/templates/author/message/message_detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/author/templates/author/message/message_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/author/templates/author/message/message_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/author/templates/author/partials/comments.html" beforeDir="false" afterPath="$PROJECT_DIR$/author/templates/author/partials/comments.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/author/templates/author/partials/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/author/templates/author/partials/navbar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/author/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/author/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/author/views/admin_group_views.py" beforeDir="false" afterPath="$PROJECT_DIR$/author/views/admin_group_views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/author/views/article_views.py" beforeDir="false" afterPath="$PROJECT_DIR$/author/views/article_views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/author/views/author_views.py" beforeDir="false" afterPath="$PROJECT_DIR$/author/views/author_views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/author/views/category_views.py" beforeDir="false" afterPath="$PROJECT_DIR$/author/views/category_views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/author/views/config_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/author/views/config_view.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/author/views/menu_views.py" beforeDir="false" afterPath="$PROJECT_DIR$/author/views/menu_views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/author/views/message_views.py" beforeDir="false" afterPath="$PROJECT_DIR$/author/views/message_views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/fixtures/fixtures.json" beforeDir="false" afterPath="$PROJECT_DIR$/blog/fixtures/fixtures.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/templates/blog/about/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/about/about.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/templates/blog/about/contact.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/about/contact.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/templates/blog/about/privacy_policy.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/about/privacy_policy.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/templates/blog/about/terms.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/about/terms.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/templates/blog/article/homepage.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/article/homepage.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/templates/blog/partials/comments.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/partials/comments.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/templates/blog/partials/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/partials/footer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/templates/blog/partials/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/partials/navbar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/templates/blog/partials/sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/partials/sidebar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cms/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/cms/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/blog/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/blog/css/style.css" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -275,6 +232,7 @@
       <workItem from="1573539534040" duration="4437000" />
       <workItem from="1573621872716" duration="9045000" />
       <workItem from="1573797948263" duration="1805000" />
+      <workItem from="1574010812542" duration="407000" />
     </task>
     <servers />
   </component>
