@@ -1,4 +1,4 @@
-# Advanced-CMS Powered by Django Framework (Ongoing Project)
+# Advanced-CMS Powered by Django Framework
 
 <h3>Features</h3>
 <ui>
