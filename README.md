@@ -16,7 +16,7 @@
 
 <h3>Requirements</h3>
 <ui>
-	<li>Python 3.7.X</li>
+	<li>Python 3.7.X or Up</li>
 </ui>
 
 <h3>Steps to setup</h3>
@@ -24,7 +24,7 @@
 	<li><b>Open Terminal/CMD and enter these commands</b></li>
 	<li>git clone https://github.com/HarshGajjarXXIV/Advanced-CMS.git</li>
 	<li>cd Advanced-CMS</li>
-	<li>pip install -r requirements.txt</li>
+	<li>pip3 install -r requirements.txt</li>
 	<li>python manage.py makemigrations</li>
 	<li>python manage.py migrate</li>
 	<li>python manage.py loaddata fixtures.json</li>
